@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|c:\\users\\aaron\\onedrive - universitetet i agder\\skrivebord\\nettsideapi\\nettsideapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|c:\\users\\aaron\\onedrive - universitetet i agder\\skrivebord\\nettsideapi\\nettsideapi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|c:\\users\\aaron\\onedrive - universitetet i agder\\skrivebord\\nettsideapi\\nettsideapi\\views\\home\\kommuneinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|solutionrelative:views\\home\\kommuneinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|c:\\users\\aaron\\onedrive - universitetet i agder\\skrivebord\\nettsideapi\\nettsideapi\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|solutionrelative:views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|c:\\users\\aaron\\onedrive - universitetet i agder\\skrivebord\\nettsideapi\\nettsideapi\\views\\home\\stedsnavn.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21211AB3-7173-4599-B374-FC8FB0558BA7}|NettsideApi.csproj|solutionrelative:views\\home\\stedsnavn.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T11:32:57.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Stedsnavn.cshtml",
+              "DocumentMoniker": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Stedsnavn.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Stedsnavn.cshtml",
+              "ToolTip": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Stedsnavn.cshtml",
+              "RelativeToolTip": "Views\\Home\\Stedsnavn.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-14T11:32:21.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-14T11:32:11.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "KommuneInfo.cshtml",
+              "DocumentMoniker": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\KommuneInfo.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\KommuneInfo.cshtml",
+              "ToolTip": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\KommuneInfo.cshtml",
+              "RelativeToolTip": "Views\\Home\\KommuneInfo.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-14T11:32:10.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Aaron\\OneDrive - Universitetet i Agder\\Skrivebord\\NettsideApi\\NettsideApi\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-14T11:32:09.866Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

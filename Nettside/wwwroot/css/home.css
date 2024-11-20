@@ -1,0 +1,89 @@
+﻿body {
+    margin: 0; 
+    padding: 0; 
+    height: 100%;
+    background-image: linear-gradient(to top,white 60%, rgba(208, 236, 214, 1) 40%);
+}
+
+
+/* Flex container for text and image */
+.content-container {
+    display: flex;
+    justify-content: space-between; /* Ensures space between text and image */
+    align-items: center; /* Vertically aligns the text and image */
+    width: 100%; /* Ensure container takes full width of the page */
+    padding: 20px; /* Optional: Adds space around the container */
+}
+
+/* Text content */
+.description {
+    flex: 1; /* This makes the description take available space */
+}
+
+/* Title styling */
+.title {
+    font-family: Muli, Verdana, sans-serif;
+    margin-top: 2.5rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: black;
+    max-width: 668px;
+    letter-spacing: 1.25px;
+}
+
+/* Full description text styling */
+.fullDescription {
+    font-family: Muli, Verdana, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 550;
+    color: black;
+    margin-bottom: 36px;
+    line-height: 1.5;
+    letter-spacing: 1.25px;
+}
+
+/* SVG container */
+.picture {
+    display: flex;
+    justify-content: flex-end; /* Aligns the SVG to the right side */
+    align-items: center; /* Vertically aligns the SVG */
+    margin-bottom: 2rem;
+    margin-top: -140px; /* Decides where on the page the picture will be placed */
+}
+
+/* SVG image styling */
+.picture img {
+        object-fit: contain; /* Ensure SVG is scaled properly */
+}
+
+
+.button-container {
+    flex: 0 0 auto; /* Keeps the button size fixed */
+}
+
+/* Register change button in home page */
+.AreaChangeBtn {
+    font-family: Muli, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgba(252, 235, 205, 1);  /* The color of the button */
+    width: 500px;
+    padding: 50px;
+    margin: 200px; /* Ensures space around register change btn */
+    border-radius: 8px; /* Rounds the corner of the btn */
+    margin-top: -300px; /* Decides where on the page the button will be placed */
+    margin-left: -10px;
+}
+
+/* Register change button in home page */
+.AreaChangeBtn:hover {
+    background-color: rgba(252, 235, 205, 1);
+    border-radius: 8px;
+}
+
+
+
+
+

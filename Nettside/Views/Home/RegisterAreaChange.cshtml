@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Register Change";
+}
+
+<div style="display: flex; flex-direction: row; height: 100vh; background-color: #d0a15a;"> 
+    <!-- Map section -->
+    <div id="map" style="flex: 2; height: 100%;"></div>
+
+    <!-- Form section -->
+    <div style="flex: 1; background-color: #d0a15a; padding: 20px; display: flex; flex-direction: column; gap: 20px; height: 100%;">
+        <h2 style="color: white;">Legg til en endring i kartet</h2>
+        <form asp-action="RegisterAreaChange" method="post" style="display: flex; flex-direction: column; gap: 15px;">
+            <!-- User's RapportID -->
+            <label for="rapportID" style="color: white;">RapportID</label>
+            <input type="text" id="rapportID" name="RapportID" class="form-control" placeholder="Brukerens RapportID" readonly />
+
+            <!-- GeoJSON Data (hidden) -->
+            <input type="hidden" id="geoJsonInput" name="geoJson" />
+
+            <!-- Latitude -->
+            <label for="latitude" style="color: white;">Breddegrad</label>
+            <input type="text" id="latitude" name="Latitude" class="form-control" readonly />
+
+            <!-- Longitude -->
+            <label for="longitude" style="color: white;">Lengdegrad</label>
+            <input type="text" id="longitude" name="Longitude" class="form-control" readonly />
+
+            <!-- Description -->
+            <label for="description" style="color: white;">Beskrivelse</label>
+            <textarea id="description" name="Description" class="form-control" placeholder="Legg til en beskrivelse om hva slags endringer det er snakk om her..."></textarea>
+
+            <button type="submit" class="btn btn-success" style="align-self: flex-start;">Send inn</button>
+        </form>
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <!-- These four lines are important to keep -->
+    <!-- 1. Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- 2. Leaflet Draw CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
+    <!-- 3. Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- 4. Leaflet Draw JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <script>
+                // Initialize the map
+        var map = L.map('map').setView([58.1467, 7.9956], 13); // Kristiansand, Norway
+        // Center the map on a location
+
+        // Add a base map layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+
+        // Initialize the feature group that will hold the drawn shapes
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Create the drawing control
+        var drawControl = new L.Control.Draw({
+          draw: {
+            polygon: true,
+            polyline: true,
+            marker: true,
+            circle: false, // Disable circle drawing
+            rectangle: true,
+          },
+          edit: {
+            featureGroup: drawnItems,
+            remove: true, // Enable removal of shapes
+          },
+        });
+        map.addControl(drawControl);
+
+        // Utility function to calculate the centroid of a polygon or rectangle
+        function calculateCentroid(latlngs) {
+          let totalLat = 0, totalLng = 0;
+          latlngs.forEach((point) => {
+            totalLat += point.lat;
+            totalLng += point.lng;
+          });
+          return {
+            lat: totalLat / latlngs.length,
+            lng: totalLng / latlngs.length,
+          };
+        }
+
+        // Event handling when a layer is drawn on the map
+        map.on(L.Draw.Event.CREATED, function (e) {
+          var type = e.layerType,
+            layer = e.layer;
+
+          // Add the drawn layer to the map
+          drawnItems.addLayer(layer);
+
+          // Get the GeoJSON representation of the drawn layer
+          var geoJsonData = layer.toGeoJSON();
+          var geoJsonString = JSON.stringify(geoJsonData);
+
+          // Set the GeoJSON string into the hidden input field
+          document.getElementById('geoJsonInput').value = geoJsonString;
+
+          // Handle the coordinates for different shapes
+          if (type === 'marker') {
+            // For markers, use the latlng directly
+            var latlng = layer.getLatLng();
+            document.getElementById('latitude').value = latlng.lat;
+            document.getElementById('longitude').value = latlng.lng;
+          } else if (type === 'polygon' || type === 'rectangle' || type === 'polyline') {
+            // For shapes, calculate the centroid
+            var latlngs = layer.getLatLngs()[0]; // Get the array of latlngs (outer ring for polygons/rectangles)
+            var centroid = calculateCentroid(latlngs);
+            document.getElementById('latitude').value = centroid.lat;
+            document.getElementById('longitude').value = centroid.lng;
+          }
+        });
+
+        // Event handling for deleting layers
+        map.on('draw:deleted', function () {
+          // Clear fields when a layer is deleted
+          document.getElementById('geoJsonInput').value = '';
+          document.getElementById('latitude').value = '';
+          document.getElementById('longitude').value = '';
+        });
+
+        // Event handling for editing layers
+        map.on('draw:edited', function () {
+          // For simplicity, you can clear fields or handle updated data
+          document.getElementById('geoJsonInput').value = '';
+          document.getElementById('latitude').value = '';
+          document.getElementById('longitude').value = '';
+        });
+
+
+
+
+    </script>
+}
