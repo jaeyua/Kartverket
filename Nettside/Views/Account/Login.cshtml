@@ -2,42 +2,57 @@
 @model LoginViewModel;
 
 @{
+    // Setter tittelen på nettsiden til "Login"
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml"; // Spesifiserer layouten for denne visningen
 }
 
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Login</h2>
+        <h2 class="text-center mb-4">Login</h2> <!-- Tittel på innloggingssiden -->
         <form asp-action="Login" method="post">
-            @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.AntiForgeryToken() <!-- Beskytter mot Cross-Site Request Forgery (CSRF) -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Vist valideringsfeil for modellen -->
+
             <div class="mb-3">
+                <!-- Label og input for e-postadresse -->
                 <label asp-for="Email" class="form-label"></label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <span asp-validation-for="Email" class="text-danger"></span> <!-- Valideringsfeil for e-post -->
             </div>
+
             <div class="mb-3">
+                <!-- Label og input for passord -->
                 <label asp-for="Password" class="form-label"></label>
                 <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <span asp-validation-for="Password" class="text-danger"></span> <!-- Valideringsfeil for passord -->
             </div>
+
             <div class="float-end">
+                <!-- Lenke for å tilbakestille passordet -->
                 <a asp-controller="Account" asp-action="VerifyEmail" class="text-decoration-none" style="color: rgba(21, 102, 48, 1)">
                     Forgot password?
                 </a>
             </div>
+
             <div class="form-check mb-3">
+                <!-- Checkbox for "Husk meg" funksjon -->
                 <label class="form-check-label">
                     <input asp-for="RememberMe" class="form-check-input" />
-                    @Html.DisplayNameFor(a => a.RememberMe)
+                    @Html.DisplayNameFor(a => a.RememberMe) <!-- Vist navn for "Husk meg" -->
                 </label>
             </div>
+
+            <!-- Submit-knapp for innlogging -->
             <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
+
             <p class="text-center mt-2">
+                <!-- Lenke til registreringssiden hvis brukeren ikke har en konto -->
                 Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-underline" style="color: rgba(21, 102, 48, 1)">Register here</a>
             </p>
+
             <div class="text-center">
+                <!-- Lenke tilbake til hjemmesiden -->
                 <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3" style="color: rgba(21, 102, 48, 1)">Back</a>
             </div>
         </form>
@@ -46,6 +61,7 @@
 
 @section Scripts {
     @{
+        // Inkluderer valideringsskript for å håndtere klient-side validering
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
     }
 }
