@@ -5,92 +5,61 @@ using Nettside.Data;
 
 namespace Nettside.Controllers
 {
-
-    /// <summary>
-    /// respomsible for managing actions related to the homepage and error handling
-    /// </summary>
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger; // logger service for logging information and errors
-
-        private readonly AppDbContext _context; // database context for accessing and saving data
-
-        // static lists to temporarily store data in memory for positions and area changes
+        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
         private static List<PositionModel> positions = new List<PositionModel>();
         private static List<AreaChange> changes = new List<AreaChange>();
 
-
-
-        /// <summary>
-        /// constructor for injecting dependencies like the logger and database context
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="context"></param>
+        // Konstruktør som initialiserer loggeren og databasen.
         public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
         }
 
-        
-
-        // handles GET requests to display the homepage
+        // Vist hovedsiden (Index).
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-
-        // displays the 'correctmap' view for submitting map corrections
+        // Vist kartkorreksjonssiden (CorrectMap) for GET-forespørsler.
         [HttpGet]
         public IActionResult CorrectMap()
         {
             return View();
         }
 
-
-        /// <summary>
-        /// handles post requests for map correction submissions
-        /// </summary>
-        /// <param name="model">the position model containing submitted correction data</param>
-        /// <returns></returns>
+        // Håndter POST-forespørsel for kartkorreksjon og lagre posisjonsdata hvis modellen er gyldig.
         [HttpPost]
         public IActionResult CorrectMap(PositionModel model)
         {
             if (ModelState.IsValid)
             {
-                // add the valid position data to the in-memory list
                 positions.Add(model);
-
-
-                // redirect to the overview of corrections
                 return View("CorrectionOverview", positions);
             }
             return View();
         }
 
-
-
-       
+        // Vist oversikt over lagrede posisjoner (CorrectionOverview).
         [HttpGet]
         public IActionResult CorrectionOverview()
         {
             return View(positions);
         }
 
+        // Vist siden for registrering av områdeendring (RegisterAreaChange).
         [HttpGet]
         public IActionResult RegisterAreaChange()
         {
             return View();
         }
 
-        /// <summary>
-        /// handles the submission of new area change data, validates it, and saves it to the database
-        /// </summary>
-        /// <param name="geoJson">the geojson string representing the area changw</param>
-        /// <param name="description">description of the area change</param>
-        /// <returns>redirects to the "arechangeoverview" view if successful, or returns a badrequest if data is invalid</returns>
+        // Håndter POST-forespørsel for å registrere en områdeendring i databasen.
         [HttpPost]
         public IActionResult RegisterAreaChange(string geoJson, string description)
         {
@@ -107,11 +76,9 @@ namespace Nettside.Controllers
                     Description = description
                 };
 
-                // Save to the database
                 _context.GeoChange.Add(newGeoChange);
                 _context.SaveChanges();
 
-                // Redirect to the overview of changes
                 return RedirectToAction("AreaChangeOverview");
             }
             catch (Exception ex)
@@ -121,18 +88,18 @@ namespace Nettside.Controllers
             }
         }
 
+        // Vist personvernspolitikk-siden (Privacy).
         public IActionResult Privacy()
         {
             return View();
         }
 
-        // Display the overview of registered changes fetched from the database
+        // Hent oversikt over områdeendringer fra databasen og vis den.
         [HttpGet]
         public IActionResult AreaChangeOverview()
         {
             var changes_cb = _context.GeoChange.ToList();
             return View(changes_cb);
         }
-
     }
 }
