@@ -2,7 +2,8 @@
 @inject SignInManager<Users> signInManager;
 
 <ul class="navbar-nav ms-auto">
-    @if (signInManager.IsSignedIn(User))  <!-- Checks if the user is signed in -->
+    <!-- Checks if the user is signed in -->
+    @if (signInManager.IsSignedIn(User))   
     {
         <li class="nav-item">
             <!-- Logout form that posts to the Logout action in the Account controller -->
