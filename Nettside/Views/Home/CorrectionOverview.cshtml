@@ -1,46 +1,47 @@
-﻿@model List<Nettside.Models.PositionModel>
+﻿@model List<Nettside.Models.PositionModel>  // Modellen som inneholder en liste av posisjoner som skal vises på denne siden.
 
-<h2>Registered Corrections</h2>
+<h2>Registered Corrections</h2>  // Tittel som beskriver siden som viser de registrerte korrigeringene.
 
 <div>
-    @foreach (var position in Model)
-
-
-
+    // Begynner en div-container som inneholder informasjon om hver posisjon.
+    @foreach (var position in Model)  // Itererer gjennom listen av posisjoner i modellen.
     {
         <p><strong>Latitude:</strong>@position.Latitude</p>
+        // Vist breddegrad for posisjonen.
         <p><strong>Longitude:</strong>@position.Longitude</p>
+        // Vist lengdegrad for posisjonen.
         <p><strong>Description:</strong>@position.Description</p>
+        // Vist beskrivelse for posisjonen.
     }
 </div>
-<div id="map" style="height: 500px;"></div>
+
+<div id="map" style="height: 500px;"></div>  // Plassholder for kartet med en høyde på 500px.
 
 @section Scripts {
-
+      // Inkluderer nødvendige skript for kartet og posisjonene.
     <script>
-        var map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        var map = L.map('map').setView([0, 0], 2);  // Initialiserer kartet og setter startposisjon (0,0) med zoom-nivå 2.
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {  // Legger til OpenStreetMap-lagene på kartet.
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var positions = @Json.Serialize(Model);
+        var positions = @Json.Serialize(Model);  // Serialiserer modellen (posisjoner) til JSON-format.
 
-        positions.forEach(function (position) {
-            var marker = L.marker([position.latitude, position.longitude]).addTo(map);
+        positions.forEach(function (position) {  // Itererer gjennom hver posisjon i modellen.
+            var marker = L.marker([position.latitude, position.longitude]).addTo(map);  // Lager et kartmerke for hver posisjon.
 
-            // To show the address in the popup
-            var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.latitude}&lon=${position.longitude}`;
+            var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.latitude}&lon=${position.longitude}`;  // Lager en URL for å hente adresseinformasjon basert på koordinatene.
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    var address = data.display_name ? data.display_name : "Address not found";
-                    marker.bindPopup(`${position.description}<br>Address: ${address}`).openPopup();
+            fetch(url)  // Henter adresseinformasjon fra OpenStreetMap API.
+                .then(response => response.json())  // Konverterer svaret til JSON.
+                .then(data => {  // Behandler JSON-data.
+                    var address = data.display_name ? data.display_name : "Address not found";  // Henter adressen fra dataene, eller viser en feilmelding hvis ikke tilgjengelig.
+                    marker.bindPopup(`${position.description}<br>Address: ${address}`).openPopup();  // Legger til beskrivelse og adresse i popup på kartmarkøren.
                 })
-                .catch(error => {
-                    marker.bindPopup(`${position.description}<br>Address: Not available`).openPopup();
+                .catch(error => {  // Håndterer eventuelle feil i API-anropet.
+                    marker.bindPopup(`${position.description}<br>Address: Not available`).openPopup();  // Vist feilmelding om adresse ikke er tilgjengelig.
                 });
         });
     </script>
 }
-
