@@ -1,22 +1,29 @@
 ﻿@model Kartverket16.Models.ViewModels.ProfilePageViewModel
 }
 
+<!-- Bakgrunnselement som kan være en del av designet -->
 <div class="center-background"> </div>
-    <div class="profile-wrapper"> </div>
-        <h1>Profile</h1>
 
+<!-- Wrapper for profilinnholdet -->
+<div class="profile-wrapper"> </div>
 
-        <div class="input-box">
-            <label for="FirstName">FirstName</label>
-            <input type="text" asp-for="FirstName" readonly>
-        </div>
+<!-- Tittel på profilen -->
+<h1>Profile</h1>
 
-        <div class="input-box">
-            <label for="LastName">LastName:</label>
-            <input type="text" asp-for="LastName" readonly>
-        </div>
+<!-- Input-boks for fornavn, som er bare lesbar -->
+<div class="input-box">
+    <label for="FirstName">FirstName</label>
+    <input type="text" asp-for="FirstName" readonly> <!-- Bruker asp-for for å binde til FirstName-egenskapen i modellen -->
+</div>
 
-        <div class="input-box">
-            <label for="Email">Email:</label>
-            <input type="email" asp-for="Email" readonly>
-        </div>
+<!-- Input-boks for etternavn, som også er bare lesbar -->
+<div class="input-box">
+    <label for="LastName">LastName:</label>
+    <input type="text" asp-for="LastName" readonly> <!-- Bruker asp-for for å binde til LastName-egenskapen i modellen -->
+</div>
+
+<!-- Input-boks for e-post, også bare lesbar -->
+<div class="input-box">
+    <label for="Email">Email:</label>
+    <input type="email" asp-for="Email" readonly> <!-- Bruker asp-for for å binde til Email-egenskapen i modellen -->
+</div>
