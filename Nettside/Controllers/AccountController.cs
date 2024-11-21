@@ -11,7 +11,7 @@ namespace Nettside.Controllers
 {
     /// <summary>
     /// Controller for handling account-related actions such as login, registration, and profile management
-    /// </summary>
+    
 
     [Authorize] // Requires authentication for all actions by default unless otherwise specified
     public class AccountController : Controller
