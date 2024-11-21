@@ -6,14 +6,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Nettside</title>
+    <!-- Angir tittelen på nettsiden dynamisk basert på ViewData["Title"]. -->
 
     @*   // Importerer bootstrap + styling.  *@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-zrsion="true" />
+    <!-- Inkluderer Bootstrap for layout og stiler. -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Inkluderer tilpasset CSS for nettsiden (site.css). asp-append-version legger til versjonsnummer for cache-busting. -->
     <link rel="stylesheet" href="~/css/mycsstheme.css" />
+    <!-- Inkluderer en tilpasset tema-fil for styling. -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="" />
+    <!-- Inkluderer Leaflet CSS for kartet, med sikkerhetsintegritet for å sikre filens integritet. -->
 
 </head>
 <body>
@@ -23,51 +28,60 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/images/kartverket.svg" alt="Kartverket Logo" style="height: 70px;" />
                 </a>
+                <!-- Logoen for nettstedet, lenker til hjem-siden (Index). -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Toggle-knapp for å vise/skjule menyen på mobilvisning. -->
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="CorrectMap">Correct Map</a>
                         </li>
-
+                        <!-- Lenke til "Correct Map" siden. -->
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="RegisterAreaChange">Register Area Change</a>
                         </li>
-
+                        <!-- Lenke til "Register Area Change" siden. -->
                         <partial name="_LoginPartial" />
+                        <!-- Viser innloggingsdetaljer (fra _LoginPartial) hvis brukeren er logget inn. -->
                         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/images/menubar.svg" alt="Menu bar" style="height: 50px;" />
                         </a>
+                        <!-- Ikon for menyen (menubar). -->
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <!-- Innholdet fra den aktuelle visningen (Controller/Action) blir rendert her. -->
         </main>
     </div>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section">
                 <img src="~/images/kartverket.svg" alt="Kartverket Logo" class="logo" style="height: 70px">
             </div>
+            <!-- Kartverket-logoen i footer. -->
             <div class="footer-section">
                 <h4>Kontakt oss</h4>
                 <p>Telefon: <a href="tel:32118000">32 11 80 00</a></p>
                 <p>E-post: <a href="mailto:post@kartverket.no">post@kartverket.no</a></p>
             </div>
+            <!-- Kontaktinformasjon i footer. -->
             <div class="footer-section">
                 <h4>Hjelp</h4>
                 <p><a href="#">Driftsmeldinger</a></p>
                 <p><a href="#">Ofte stilte spørsmål</a></p>
                 <p><a href="#">Skjemaer</a></p>
             </div>
+            <!-- Hjelpeseksjon med lenker til driftsmeldinger, spørsmål og skjemaer. -->
             <div class="footer-section">
                 <h4>Aktuelt</h4>
                 <p><a href="#">Arrangementer og kurs</a></p>
@@ -75,15 +89,21 @@
                 <p><a href="#">Ledige stillinger</a></p>
                 <p><a href="#">Presse </a></p>
             </div>
+            <!-- Aktuelt-seksjon med lenker til arrangementer, nyheter, jobbmuligheter og presseinformasjon. -->
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Inkluderer jQuery for JavaScript-funksjonalitet. -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inkluderer Bootstrap JavaScript for ekstra funksjonalitet (for eksempel modal og dropdown). -->
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Inkluderer tilpasset JavaScript for nettsiden (site.js). -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
-
+    <!-- Inkluderer Leaflet JavaScript-bibliotek for kartfunksjonalitet. -->
     @await RenderSectionAsync("Scripts", required: false)
+    <!-- Lar enkelte visninger legge til spesifikke JavaScript-seksjoner om nødvendig. -->
 </body>
 </html>

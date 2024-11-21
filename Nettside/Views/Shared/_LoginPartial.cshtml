@@ -2,23 +2,27 @@
 @inject SignInManager<Users> signInManager;
 
 <ul class="navbar-nav ms-auto">
-    @if (signInManager.IsSignedIn(User))
+    @if (signInManager.IsSignedIn(User))  <!-- Checks if the user is signed in -->
     {
         <li class="nav-item">
+            <!-- Logout form that posts to the Logout action in the Account controller -->
             <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                @Html.AntiForgeryToken() <!-- protects the logout POST request -->
+                @Html.AntiForgeryToken() <!-- Protects the logout POST request from CSRF attacks -->
                 <button type="submit" class="nav-link btn btn-link text-dark p-0">Logout</button>
+                <!-- Logout button styled as a link, but submits the form when clicked -->
             </form>
         </li>
     }
     else
     {
+        <!-- Links for Login and Register if the user is not signed in -->
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+            <!-- Login link that directs to the Login action of the Account controller -->
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+            <!-- Register link that directs to the Register action of the Account controller -->
         </li>
     }
-
 </ul>

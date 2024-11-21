@@ -2,19 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <!-- Angir tegnsettet for nettsiden som UTF-8. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Sikrer at nettsiden er responsiv og tilpasser seg forskjellige skjermstørrelser. -->
+
     <title>@ViewBag.Title</title>
+    <!-- Setter tittelen på nettsiden ved å hente verdien fra ViewBag. -->
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Importerer Bootstrap CSS-bibliotek for stil og layout. -->
+
     <link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
+    <!-- Importerer en tilpasset CSS-fil for spesifikke stiler på denne siden. -->
 </head>
 <body>
     <div>
         @RenderBody()
+        <!-- Plasserer hovedinnholdet for hver side basert på gjeldende visning. -->
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Importerer jQuery-biblioteket for å støtte interaktivitet. -->
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Importerer Bootstrap JavaScript for komponenter som modaler og dropdowns. -->
+
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Importerer en tilpasset JavaScript-fil for funksjonalitet. -->
     @await RenderSectionAsync("Scripts", required: false)
+    <!-- Tillater at spesifikke visninger inkluderer egne JavaScript-seksjoner. -->
 </body>
 </html>
