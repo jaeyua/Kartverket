@@ -9,7 +9,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Nettside.Controllers
 {
-    /// <summary>
+  
     /// Controller for handling account-related actions such as login, registration, and profile management
     
 
