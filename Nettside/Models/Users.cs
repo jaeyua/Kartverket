@@ -2,9 +2,13 @@
 
 namespace Nettside.Models
 {
+    // Brukermodell som arver fra IdentityUser og legger til fornavn og etternavn.
     public class Users : IdentityUser
     {
-        public string FirstName { get; set; }  
+        // Brukerens fornavn.
+        public string FirstName { get; set; }
+
+        // Brukerens etternavn.
         public string LastName { get; set; }
     }
 }
