@@ -5,46 +5,52 @@ using Nettside.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Legger til tjenester for MVC-kontrollere og visninger.
 builder.Services.AddControllersWithViews();
 
+// Konfigurerer databasekonteksten for MariaDB ved hjelp av en tilkoblingsstreng fra konfigurasjonsfilen.
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),
-new MySqlServerVersion(new Version(10, 5, 9))));
+    options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),
+    new MySqlServerVersion(new Version(10, 5, 9))));
 
+// Konfigurerer Identity-tjenester for autentisering og autorisasjon, inkludert passord- og påloggingskrav.
 builder.Services.AddIdentity<Users, IdentityRole>(options =>
 {
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = false;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
+    // Angir passordpolicy for brukere.
+    options.Password.RequireNonAlphanumeric = false; // Ikke-alfanumeriske tegn kreves ikke.
+    options.Password.RequiredLength = 8;            // Minimum passordlengde er 8 tegn.
+    options.Password.RequireUppercase = false;      // Store bokstaver kreves ikke.
+    options.User.RequireUniqueEmail = true;         // E-postadresser må være unike.
+
+    // Angir påloggings- og kontobekreftelseskrav.
+    options.SignIn.RequireConfirmedAccount = false; // Kontoen trenger ikke å bekreftes.
+    options.SignIn.RequireConfirmedEmail = false;   // E-postbekreftelse kreves ikke.
+    options.SignIn.RequireConfirmedPhoneNumber = false; // Bekreftelse av telefonnummer kreves ikke.
 })
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<AppDbContext>() // Bruker `AppDbContext` til å lagre Identity-data.
+    .AddDefaultTokenProviders();              // Legger til standard token-providere for funksjoner som passordgjenoppretting.
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Konfigurerer HTTP-forespørselspipelinen.
 if (!app.Environment.IsDevelopment())
 {
+    // Bruker en feilhåndteringsside for produksjon.
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // Aktiverer HTTP Strict Transport Security (HSTS).
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseHttpsRedirection(); // Omdirigerer HTTP-forespørsler til HTTPS.
+app.UseStaticFiles();      // Gjør statiske filer tilgjengelige for klienten.
 
-app.UseRouting();
+app.UseRouting();          // Aktiverer ruting av forespørsler.
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthentication();   // Aktiverer autentiseringstjenester.
+app.UseAuthorization();    // Aktiverer autorisasjonstjenester.
 
+// Konfigurerer standard rute for MVC.
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"); // Ruter til `HomeController` og `Index`-handling som standard.
 
-app.Run();
+app.Run(); // Starter applikasjonen.
