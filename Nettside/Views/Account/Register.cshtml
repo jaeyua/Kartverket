@@ -12,6 +12,7 @@
         <form asp-action="Register" method="post">
             @Html.AntiForgeryToken() <!-- Legger til anti-CSRF token for sikkerhet -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Vist valideringsfeil -->
+
             <!-- Fornavn inputfelt -->
             <div class="mb-3">
                 <label asp-for="FirstName" class="form-label">First Name</label>
