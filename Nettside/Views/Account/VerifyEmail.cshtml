@@ -8,21 +8,21 @@
 
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Verify Email</h2> <!-- Title for the page -->
-        <!-- Form to verify email -->
+        <h2 class="text-center mb-4">Verify Email</h2> <!-- Header for the page -->
+        <!-- Form to submit the email for verification -->
         <form asp-action="VerifyEmail" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Displays validation errors -->
-            <!-- Email input field -->
+            <!-- Email input field for the user -->
             <div class="mb-3">
                 <label asp-for="Email" class="form-label"></label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span> <!-- Validation error for Email -->
+                <span asp-validation-for="Email" class="text-danger"></span> <!-- Displays validation errors for email -->
             </div>
 
-            <!-- Submit button for verification -->
+            <!-- Submit button for the form -->
             <input type="submit" value="Verify" class="btn btn-success w-100 p-2" />
 
-            <!-- Link to go back to the homepage -->
+            <!-- Link to navigate back to the homepage -->
             <div class="text-center mt-2">
                 <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
             </div>
@@ -33,6 +33,6 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
-        <!-- Renders validation scripts -->
+        <!-- Includes client-side validation scripts -->
     }
 }
