@@ -5,53 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 using Nettside.Models;
 using UsersApp.ViewModels;
 
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Nettside.Controllers
 {
-  
-    /// Controller for handling account-related actions such as login, registration, and profile management
-    
-
-    [Authorize] // Requires authentication for all actions by default unless otherwise specified
+    [Authorize]
     public class AccountController : Controller
     {
-        private readonly SignInManager<Users> signInManager; // service provided by asp.net core identity
-        private readonly UserManager<Users> userManager; // service provided by asp.net core identity
+        private readonly SignInManager<Users> signInManager;
+        private readonly UserManager<Users> userManager;
 
-
-        /// <summary>
-        /// Constructor for injecting SignInManager and UserManager services
-        /// </summary>
-        /// <param name="signInManager">a service to manage user sign-in operations</param>
-        /// <param name="userManager">a service to manage user interactions</param>
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager) // constructor to inject UserManager & SignInManager services.
+        // Constructor to initialize SignInManager and UserManager
+        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
 
-
-        // displays the login page
+        // Displays the login page
         [HttpGet]
-        [AllowAnonymous]  // allows access without authentication
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
-        
+
+        // Displays the page for selecting employee or map user
         [HttpGet]
-        [AllowAnonymous]  // allows access without authentication
+        [AllowAnonymous]
         public IActionResult EmployeeOrMapuser()
         {
             return View();
         }
-        
-        /// <summary>
-        /// Handles user login requests
-        /// </summary>
-        /// <param name="model">the login form data</param>
-        /// <returns>redirects to the home page if successful or redisplays the login form with errors</returns>
+
+        // Handles login form submission
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [HttpPost]
@@ -59,7 +44,6 @@ namespace Nettside.Controllers
         {
             if (ModelState.IsValid)
             {
-               // attempt to sign in the user with the provided credentials
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
@@ -75,12 +59,7 @@ namespace Nettside.Controllers
             return View(model);
         }
 
-
-
-        /// <summary>
-        /// displays the profile page for the logged-in user
-        /// </summary>
-        /// <returns>the profile page view or redirects to login if the user is not found</returns>
+        // Displays the profile page for the logged-in user
         [HttpGet]
         public async Task<IActionResult> ProfilePage()
         {
@@ -88,41 +67,30 @@ namespace Nettside.Controllers
 
             if (currentUser != null)
             {
-               // create a viewmodel with the current user's details
                 var profilePageViewModel = new ProfilePageViewModel
                 {
                     FirstName = currentUser.FirstName,
                     LastName = currentUser.LastName,
                     Email = currentUser.Email
-
                 };
 
                 return View(profilePageViewModel);
-
             }
-           // redirect to login if the user is not authenticated
+
             return RedirectToAction("Login");
         }
 
-
-
-        // displays the registration page
-        [AllowAnonymous] 
+        // Displays the registration page
+        [AllowAnonymous]
         [HttpGet]
-
         public IActionResult Register()
         {
             return View();
         }
 
-
-        /// <summary>
-        /// Handles user registration requests
-        /// </summary>
-        /// <param name="model">the registration form data</param>
-        /// <returns>redirects to login on success or redisplays the form with errors</returns>
+        // Handles registration form submission
         [ValidateAntiForgeryToken]
-        [AllowAnonymous] 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -134,7 +102,6 @@ namespace Nettside.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
-
                 };
 
                 var result = await userManager.CreateAsync(users, model.Password);
@@ -156,19 +123,14 @@ namespace Nettside.Controllers
             return View(model);
         }
 
-
-        // displays the email verification
+        // Displays the email verification page
         public IActionResult VerifyEmail()
         {
             return View();
         }
 
-        /// <summary>
-        /// handles email verification submissions
-        /// </summary>
-        /// <param name="model">the email verification form data</param>
-        /// <returns>redirects to password change on success or redisplays the form with errors</returns>
-        [AllowAnonymous] 
+        // Handles email verification form submission
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> VerifyEmail(VerifyEmailViewModel model)
         {
@@ -189,12 +151,7 @@ namespace Nettside.Controllers
             return View(model);
         }
 
-
-        /// <summary>
-        /// displays the passwordchange page for a specified user
-        /// </summary>
-        /// <param name="username">the username of the user who is changing their passsword</param>
-        /// <returns>the password change form or redirects to verifyemail if no username is provided</returns>
+        // Displays the change password page
         public IActionResult ChangePassword(string username)
         {
             if (string.IsNullOrEmpty(username))
@@ -204,12 +161,7 @@ namespace Nettside.Controllers
             return View(new ChangePasswordViewModel { Email = username });
         }
 
-
-        /// <summary>
-        /// handles password change submissions
-        /// </summary>
-        /// <param name="model">the password change form data</param>
-        /// <returns>redirects to login on success or redisplays the form with errors</returns>
+        // Handles change password form submission
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -227,7 +179,6 @@ namespace Nettside.Controllers
                     }
                     else
                     {
-
                         foreach (var error in result.Errors)
                         {
                             ModelState.AddModelError("", error.Description);
@@ -249,8 +200,7 @@ namespace Nettside.Controllers
             }
         }
 
-
-        // logs out the user 
+        // Logs the user out and redirects to the home page
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Logout()
