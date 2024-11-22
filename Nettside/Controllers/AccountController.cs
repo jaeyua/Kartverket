@@ -9,7 +9,7 @@ using UsersApp.ViewModels;
 
 namespace Nettside.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private readonly SignInManager<Users> signInManager;
@@ -71,7 +71,54 @@ namespace Nettside.Controllers
 
 
 
-        
+
+        [HttpGet]
+        public async Task<ActionResult> RegisterCaseWorker()
+        {
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterCaseworker(RegisterViewModel registerViewModel)
+        {
+            var createUser = new Users
+            {
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
+                Email = registerViewModel.Email,
+                UserName = registerViewModel.Username
+            };
+
+            // Attempt to create the user
+            var applicationResult = await userManager.CreateAsync(createUser, registerViewModel.Password);
+
+            if (applicationResult.Succeeded)
+            {
+                // Add the user to the "PrivateUser" role
+                var applicationIdentityResult = await userManager.AddToRoleAsync(createUser, "Caseworker");
+
+                if (applicationIdentityResult.Succeeded)
+                {
+                    // Redirect to Login if successful
+                    return RedirectToAction("Login");
+                }
+            }
+
+            // If any of the operations fail, return the Register view with errors
+            foreach (var error in applicationResult.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(registerViewModel);
+        }
+
+
+
+
+
 
 
 
@@ -93,7 +140,7 @@ namespace Nettside.Controllers
             if (ModelState.IsValid)
             {
                 // attempt to log in the user
-                var signInresult = await signInManager.PasswordSignInAsync(loginViewmodel.Email, loginViewmodel.Password, loginViewmodel.RememberMe, false);
+                var signInresult = await signInManager.PasswordSignInAsync(loginViewmodel.Email, loginViewmodel.Password, false, false);
 
                 if (signInresult != null && signInresult.Succeeded)
                 {
