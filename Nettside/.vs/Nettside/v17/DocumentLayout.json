@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|c:\\users\\tring\\documents\\is202\\kartverket\\nettside\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|c:\\users\\tring\\documents\\is202\\kartverket\\nettside\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|c:\\users\\tring\\documents\\is202\\kartverket\\nettside\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|solutionrelative:models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|c:\\users\\tring\\documents\\is202\\kartverket\\nettside\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C37192F2-936E-4E44-A519-AB9860CECDA6}|Nettside.csproj|c:\\users\\tring\\documents\\is202\\kartverket\\nettside\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -124,11 +124,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
@@ -141,20 +141,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAqwE8AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T13:30:36.933Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RegisterViewModel.cs",
               "DocumentMoniker": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Models\\RegisterViewModel.cs",
               "RelativeDocumentMoniker": "Models\\RegisterViewModel.cs",
@@ -162,12 +162,11 @@
               "RelativeToolTip": "Models\\RegisterViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T13:29:08.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T13:29:08.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -175,12 +174,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAEgAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T08:59:07.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T08:59:07.653Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\tring\\Documents\\IS202\\Kartverket\\Nettside\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -188,8 +186,7 @@
               "RelativeToolTip": "Data\\AppDbContext.cs",
               "ViewState": "AgIAAG0AAAAAAAAAAAAkwEoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:30:02.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T12:30:02.191Z"
             },
             {
               "$type": "Document",
@@ -201,8 +198,7 @@
               "RelativeToolTip": "LoginAndRegistrationViewModels\\LoginViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T16:45:44.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T16:45:44.386Z"
             },
             {
               "$type": "Document",
@@ -214,8 +210,7 @@
               "RelativeToolTip": "Models\\Users.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:44:03.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T11:44:03.965Z"
             },
             {
               "$type": "Document",
@@ -227,8 +222,7 @@
               "RelativeToolTip": "Controllers\\HomeController.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAewHIAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T13:11:52.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T13:11:52.112Z"
             },
             {
               "$type": "Document",
@@ -240,8 +234,7 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-15T00:51:13.331Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-15T00:51:13.331Z"
             },
             {
               "$type": "Document",
@@ -253,8 +246,7 @@
               "RelativeToolTip": "Views\\Account\\EmployeeOrMapuser.cshtml",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T17:20:08.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-21T17:20:08.82Z"
             },
             {
               "$type": "Document",
@@ -266,8 +258,7 @@
               "RelativeToolTip": "Views\\Account\\Register.cshtml",
               "ViewState": "AgIAABYAAAAAAAAAAAAAACkAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T13:49:52.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T13:49:52.591Z"
             },
             {
               "$type": "Document",
@@ -279,8 +270,7 @@
               "RelativeToolTip": "Views\\Account\\RegisterCaseworker.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-22T15:10:40.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T15:10:40.042Z"
             },
             {
               "$type": "Document",
@@ -292,8 +282,7 @@
               "RelativeToolTip": "LoginAndRegistrationViewModels\\ChangePasswordViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T16:58:32.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T16:58:32.494Z"
             },
             {
               "$type": "Document",
@@ -305,8 +294,7 @@
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAACEAAAAAAAAAAAAAACYAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-15T01:03:07.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-15T01:03:07.494Z"
             },
             {
               "$type": "Document",

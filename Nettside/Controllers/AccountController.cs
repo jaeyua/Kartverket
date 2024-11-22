@@ -9,7 +9,7 @@ using UsersApp.ViewModels;
 
 namespace Nettside.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly SignInManager<Users> signInManager;
