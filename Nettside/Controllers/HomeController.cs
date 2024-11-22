@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Nettside.Models;
 using Nettside.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Nettside.Controllers
 {
@@ -32,13 +33,31 @@ namespace Nettside.Controllers
             _context = context;
         }
 
-        
-
+           
         // handles GET requests to display the homepage
         [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize(Roles = "CASEWORKER")]
+        public IActionResult OpprettAnsattBruker()
+        {
+            return View("Ansatt/OpprettBruker");
+        }
+
+
+        [Authorize(Roles = "PrivateUser")]
+        public IActionResult OpprettPrivatBruker()
+        {
+            return View("Privatperson/OpprettPrivatBruker");
+        }
+
+        [Authorize(Roles = "SystemAdministrator")]
+        public IActionResult AdminDashBoard()
+        {
+            return View("Admin/Dashboard");
         }
 
 
@@ -79,6 +98,8 @@ namespace Nettside.Controllers
             return View(positions);
         }
 
+
+        [Authorize(Roles = "Caseworker")]
         [HttpGet]
         public IActionResult RegisterAreaChange()
         {
@@ -91,6 +112,7 @@ namespace Nettside.Controllers
         /// <param name="geoJson">the geojson string representing the area changw</param>
         /// <param name="description">description of the area change</param>
         /// <returns>redirects to the "arechangeoverview" view if successful, or returns a badrequest if data is invalid</returns>
+        [Authorize(Roles = "Caseworker")]
         [HttpPost]
         public IActionResult RegisterAreaChange(string geoJson, string description)
         {
@@ -127,6 +149,7 @@ namespace Nettside.Controllers
         }
 
         // Display the overview of registered changes fetched from the database
+        [Authorize(Roles = "Caseworker, PrivateUser")]
         [HttpGet]
         public IActionResult AreaChangeOverview()
         {

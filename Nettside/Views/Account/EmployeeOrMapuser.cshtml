@@ -1,3 +1,6 @@
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<Users> UserManager
+
 
 <head>
     <title class="title">Privatperson eller ansatt</title>
@@ -7,7 +10,19 @@
     <div class="site-container">
         <h1 title="site-title" style="text-align: center"> Er du privatperson eller ansatt?</h1>
         <div class="site-box">
+        <form asp-action="EmployeeOrMapUser" method="post">
+            <button type="submit" name="userRole" value="PrivateUser" class="role-button">
+                Jeg er privatperson 
+            </button>
+                <button type="submit" name="userRole" value="Caseworker" class="role-button">
+                    Jeg er ansatt
+                </button>
+                <button type="submit" name="userRole" value="Systemadministrator" class="role-button">
+                    Jeg er systemadministrator
+                </button>
 
+
+        </form>
         </div>
     </div>
     </body>
