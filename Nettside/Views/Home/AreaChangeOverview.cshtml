@@ -1,60 +1,55 @@
-@model List<GeoChanges>
+@model List<GeoChanges>  // Modellen som inneholder en liste av GeoChanges, som skal vises på denne siden.
 @{
-    ViewData["Title"] = "Overview";
+    ViewData["Title"] = "Overview";  // Setter tittelen på siden til "Overview".
 }
 
-<h2>Overview of Registered Changes</h2>
+<h2>Overview of Registered Changes</h2>  @* // Tittel på visningen som beskriver oversikten. *@
 
 <table class="table">
+    @* // Definerer en HTML-tabell for å vise GeoChanges-data. *@
     <thead>
+       @*  // Tabellen har en header med kolonneoverskrifter. *@
         <tr>
-            <th>ID</th>
-            <th>GeoJSON</th>
-            <th>Description</th>
+            <th>ID</th>  // Kolonne for ID.
+            <th>GeoJSON</th>  // Kolonne for GeoJSON-data.
+            <th>Description</th>  // Kolonne for beskrivelse.
         </tr>
     </thead>
     <tbody>
+        @* // Her itererer vi gjennom modellen (GeoChanges) og viser hver endring i en ny rad. *@
         @foreach (var change in Model)
         {
             <tr>
-                <td>@change.Id</td>
-                <td>@change.GeoJson</td>
-                <td>@change.Description</td>
+                <td>@change.Id</td>  // Vist ID for endringen.
+                <td>@change.GeoJson</td>  // Vist GeoJSON-data for endringen.
+                <td>@change.Description</td>  // Vist beskrivelse av endringen.
             </tr>
         }
     </tbody>
 </table>
 
-
-<!-- Map container with defined height -->
-<div id="map" style="height: 400px;"></div>
-
+<div id="map" style="height: 400px;"></div>  @* // Plassholder for kartet, med en høyde på 400px. *@
 
 @section Scripts {
-    <!-- Important to include Leaflet CSS and JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+     @*  // Inkluderer nødvendige skript og stiler for kartet. *@
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />  @* // Inkluderer Leaflet CSS. *@
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>  @* // Inkluderer Leaflet JavaScript. *@
 
     <script>
-        // Initialize the map and set its initial view
-        var map = L.map('map').setView([58.1667, 8.0000], 15); // Adjust the coordinates and zoom level as needed
+        var map = L.map('map').setView([58.1667, 8.0000], 15);  // Initialiserer kartet og setter startposisjon og zoom-nivå.
 
-        // Add a tile layer (using OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {  // Legger til OpenStreetMap-lagene på kartet.
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors'
         }).addTo(map);
 
-        // Iterate over the registered changes and add them to the map
-        var changes = @Json.Serialize(Model);
+        var changes = @Json.Serialize(Model);  // Serialiserer modellen (GeoChanges) til JSON.
 
-        changes.forEach(function (change) {
-            // Parse the GeoJSON data and add it to the map
-            var geoJsonData = JSON.parse(change.geoJson);
-            L.geoJSON(geoJsonData).addTo(map);
+        changes.forEach(function (change) {  // Itererer gjennom hver GeoChange i modellen.
+            var geoJsonData = JSON.parse(change.geoJson);  // Parser GeoJSON-dataene for å bruke dem på kartet.
+            L.geoJSON(geoJsonData).addTo(map);  // Legger til GeoJSON-dataene på kartet.
 
-            // Optionally, bind a popup with the change description
-            var layer = L.geoJSON(geoJsonData).bindPopup(change.description);
-            layer.addTo(map);
+            var layer = L.geoJSON(geoJsonData).bindPopup(change.description);  // Lager et lag med popup for beskrivelse.
+            layer.addTo(map);  // Legger til laget på kartet.
         });
     </script>
 }

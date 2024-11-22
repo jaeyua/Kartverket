@@ -1,48 +1,47 @@
-﻿<h2>Registrer posisjon</h2>
+﻿<h2>Registrer posisjon</h2>  @* // Tittel på siden som indikerer at brukeren kan registrere posisjonen. *@
 
 <form asp-action="CorrectMap" method="post">
+    @* // Formular for å sende data til serveren, som kaller "CorrectMap" action metoden ved POST. *@
     <div class="form-group">
-        <label for="latitude">Latitude</label>
-        <input type="text" id="latitude" name="Latitude" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label for="longitude">Longitude</label>
-        <input type="text" id="longitude" name="Longitude" class="form-control" readonly />
+
+       @*  // Gruppe for inputfeltet for breddegrad. *@
+        <label for="latitude">Latitude</label>  @* // Etikett for breddegrad. *@
+        <input type="text" id="latitude" name="Latitude" class="form-control" readonly />  @* // Input-felt for breddegrad, som er skrivebeskyttet. *@
     </div>
 
     <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" name="Description" class="form-control"></textarea>
+        @* // Gruppe for inputfeltet for lengdegrad. *@
+        <label for="longitude">Longitude</label>  @* // Etikett for lengdegrad. *@
+        <input type="text" id="longitude" name="Longitude" class="form-control" readonly />  @* // Input-felt for lengdegrad, som er skrivebeskyttet. *@
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <div class="form-group">
+        @* // Gruppe for beskrivelsesfeltet. *@
+        <label for="description">Description</label>  @* // Etikett for beskrivelse. *@
+        <textarea id="description" name="Description" class="form-control"></textarea>  @* // Tekstområde for å skrive en beskrivelse. *@
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button> @*  // Sendeknapp for å sende skjemaet. *@
 </form>
 
-
-<div id="map" style="height: 400px;"></div>
+<div id="map" style="height: 400px;"></div>  @* // Plassholder for kartet med en høyde på 400px. *@
 
 @section Scripts {
+     @*  // Inkluderer nødvendige skript for kartet. *@
     <script>
-        // Initialize the map
-        var map = L.map('map').setView([51.505, -0.09], 15);
+        var map = L.map('map').setView([51.505, -0.09], 15);  // Initialiserer kartet med en startposisjon og zoom-nivå 15.
 
-        // Add OpenStreetMap tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {  // Legger til OpenStreetMap-lagene på kartet.
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Handle map click event
-        map.on('click', function(e) {
-            // Get clicked position
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
+        map.on('click', function(e) {  // Hendelse som utløses når kartet klikkes.
+            var lat = e.latlng.lat;  // Henter breddegraden fra klikkeposisjonen.
+            var lng = e.latlng.lng;  // Henter lengdegraden fra klikkeposisjonen.
 
-            // Set the latitude and longitude fields in the form
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
+            document.getElementById('latitude').value = lat;  // Setter breddegraden i input-feltet.
+            document.getElementById('longitude').value = lng;  // Setter lengdegraden i input-feltet.
 
-            // Add marker to the map
-            L.marker([lat, lng]).addTo(map);
+            L.marker([lat, lng]).addTo(map);  // Legger til et kartmerke på klikkeposisjonen.
         });
     </script>
 }
-
