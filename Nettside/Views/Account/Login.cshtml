@@ -27,12 +27,7 @@
                     Forgot password?
                 </a>
             </div>
-            <div class="form-check mb-3">
-                <label class="form-check-label">
-                    <input asp-for="RememberMe" class="form-check-input" />
-                    @Html.DisplayNameFor(a => a.RememberMe)
-                </label>
-            </div>
+            
             <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
             <p class="text-center mt-2">
                 Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-underline" style="color: rgba(21, 102, 48, 1)">Register here</a>
