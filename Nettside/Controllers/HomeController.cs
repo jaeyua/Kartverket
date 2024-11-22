@@ -41,25 +41,7 @@ namespace Nettside.Controllers
             return View();
         }
 
-        [Authorize(Roles = "CASEWORKER")]
-        public IActionResult OpprettAnsattBruker()
-        {
-            return View("Ansatt/OpprettBruker");
-        }
-
-
-        [Authorize(Roles = "PrivateUser")]
-        public IActionResult OpprettPrivatBruker()
-        {
-            return View("Privatperson/OpprettPrivatBruker");
-        }
-
-        [Authorize(Roles = "SystemAdministrator")]
-        public IActionResult AdminDashBoard()
-        {
-            return View("Admin/Dashboard");
-        }
-
+     
 
         // displays the 'correctmap' view for submitting map corrections
         [HttpGet]

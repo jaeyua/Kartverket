@@ -79,7 +79,7 @@ namespace Nettside.Controllers
             return View();
         }
 
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> RegisterCaseworker(RegisterViewModel registerViewModel)
         {
@@ -137,10 +137,17 @@ namespace Nettside.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewmodel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+
+             return View();
+            }
+
+
+                var signInresult = await signInManager.PasswordSignInAsync(loginViewmodel.UserName, loginViewmodel.Password, false, false);
+           
                 // attempt to log in the user
-                var signInresult = await signInManager.PasswordSignInAsync(loginViewmodel.Email, loginViewmodel.Password, false, false);
+              
 
                 if (signInresult != null && signInresult.Succeeded)
                 {
@@ -153,8 +160,8 @@ namespace Nettside.Controllers
 
                     return View(loginViewmodel);
                 }
-            }
-            return View(loginViewmodel);
+            
+            
         }
 
 
@@ -190,23 +197,7 @@ namespace Nettside.Controllers
             // add role to the user
             var result = await userManager.AddToRoleAsync(user, userRole);
 
-            if(result.Succeeded)
-            {
-                if(userRole == "PrivateUser")
-                {
-                    return RedirectToAction("ProfilePage", "Home");
-                }
-            }
-
-            else if (userRole == "Caseworker") 
-            {
-                
-                return RedirectToAction("VisAnsattHjem", "Home");
-            }
-            else if (userRole == "SystemAdministrator")
-            {
-                return RedirectToAction("AdminDashBoard", "Home");
-            }
+          
             
             return View();
         }
@@ -257,11 +248,12 @@ namespace Nettside.Controllers
         }
 
         // Displays the change password page
+    
         public IActionResult ChangePassword(string username)
         {
             if (string.IsNullOrEmpty(username))
             {
-                return RedirectToAction("VerifyEmail", "Account");
+                return RedirectToAction("ChangePassword", "Account");
             }
             return View(new ChangePasswordViewModel { Email = username });
         }

@@ -9,13 +9,13 @@
 <div class="account-container">
     <div class="account-box">
         <h2 class="text-center mb-4">Login</h2>
-        <form asp-action="Login" method="post">
+        <form method="post">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Password" class="form-label"></label>
@@ -23,12 +23,12 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="float-end">
-                <a asp-controller="Account" asp-action="VerifyEmail" class="text-decoration-none" style="color: rgba(21, 102, 48, 1)">
+                <a asp-controller="Account" asp-action="VerifyPassword" class="text-decoration-none" style="color: rgba(21, 102, 48, 1)">
                     Forgot password?
                 </a>
             </div>
             
-            <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
+            <button type="submit" value="Login" class="btn"> Login</button>
             <p class="text-center mt-2">
                 Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-underline" style="color: rgba(21, 102, 48, 1)">Register here</a>
             </p>
