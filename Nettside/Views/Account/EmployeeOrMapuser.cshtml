@@ -1,18 +1,13 @@
-<head>
-    <!-- Setter tittelen på nettsiden til "Privatperson eller ansatt" -->
-    <title class="title">Privatperson eller ansatt</title>
+<link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
 
-    <!-- Linker til CSS-fil for styling, og bruker asp-append-version for cache-busting -->
-    <link rel="stylesheet" href="css/account.css" asp-append-version="true" />
-</head>
-
-<body>
-    <div class="site-container">
-        <!-- Tittel på siden, sentrert i midten -->
-        <h1 title="site-title" style="text-align: center"> Er du privatperson eller ansatt?</h1>
-
-        <div class="site-box">
-            <!-- Innholdet i boksen kan fylles senere -->
+<body class="option-site">
+    <h2 class="privatperson-eller-ansatt">Er du privatperson eller ansatt?</h2>
+    <section class="middle-section">
+        <div class="middle-content">
+            <div class="btn-container">
+                <button class="btn-1"> Privatperson</button>
+                <button class="btn-1"> Ansatt</button>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
