@@ -5,7 +5,9 @@ using Nettside.Models;
 
 namespace Nettside.Data
 {
-    public class AppDbContext : IdentityDbContext<Users>
+
+
+    public class AppDbContext : IdentityDbContext<Users, IdentityRole, string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -46,7 +48,7 @@ namespace Nettside.Data
 
                 new IdentityRole
                 {
-                    Name =  "Case worker",
+                    Name =  "Caseworker",
                     NormalizedName = "CASEWORKER",
                     Id = caseWorkerRoleId,
                     ConcurrencyStamp = caseWorkerRoleId
@@ -54,7 +56,7 @@ namespace Nettside.Data
 
                 new IdentityRole
                 {
-                    Name = "Private User",
+                    Name = "PrivateUser",
                     NormalizedName = "PRIVATEUSER",
                     Id = privateUserRoleId,
                     ConcurrencyStamp = privateUserRoleId

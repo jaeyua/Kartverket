@@ -35,44 +35,44 @@ namespace Nettside.Controllers
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel registerViewmodel)
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid)
+            var createUser = new Users
             {
-                Users IdentityUser = new Users
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
+                Email = registerViewModel.Email,
+                UserName = registerViewModel.Username
+            };
+
+            // Attempt to create the user
+            var applicationResult = await userManager.CreateAsync(createUser, registerViewModel.Password);
+
+            if (applicationResult.Succeeded)
+            {
+                // Add the user to the "PrivateUser" role
+                var applicationIdentityResult = await userManager.AddToRoleAsync(createUser, "PrivateUser");
+
+                if (applicationIdentityResult.Succeeded)
                 {
-                    UserName = registerViewmodel.Email,
-                    FirstName = registerViewmodel.FirstName,
-                    LastName = registerViewmodel.LastName,
-                    Email = registerViewmodel.Email,
-                };
-
-
-                // attempt to create the user 
-                var IdentityResult = await userManager.CreateAsync(IdentityUser, registerViewmodel.Password);
-
-                if (IdentityResult.Succeeded)
-                {
-                    // assign this user the "PrivateUser" role
-                    var roleIdentityResult = await userManager.AddToRoleAsync(IdentityUser, "PrivateUser");
-
-                    if (roleIdentityResult.Succeeded)
-                    {
-                        // show success notification
-                        return RedirectToAction("Login", "Account");
-                    }
-
-
-                }
-                else
-                {
-                    // show error notification
-                    return RedirectToAction("Register");
+                    // Redirect to Login if successful
+                    return RedirectToAction("Login");
                 }
             }
 
-            return View();
+            // If any of the operations fail, return the Register view with errors
+            foreach (var error in applicationResult.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(registerViewModel);
         }
+
+
+
+        
+
 
 
 
@@ -167,23 +167,10 @@ namespace Nettside.Controllers
 
         // Displays the profile page for the logged-in user
         [HttpGet]
-        public async Task<IActionResult> ProfilePage()
+        public async Task<IActionResult> ProfilePage(RegisterViewModel registerViewModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
 
-            if (currentUser != null)
-            {
-                var profilePageViewModel = new ProfilePageViewModel
-                {
-                    FirstName = currentUser.FirstName,
-                    LastName = currentUser.LastName,
-                    Email = currentUser.Email
-                };
-
-                return View(profilePageViewModel);
-            }
-
-            return RedirectToAction("Login");
+            return View();
         }
 
 

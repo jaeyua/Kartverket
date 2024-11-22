@@ -12,8 +12,8 @@ using Nettside.Data;
 namespace Nettside.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241120132255_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20241122122634_demo")]
+    partial class demo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
