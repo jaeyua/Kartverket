@@ -3,10 +3,12 @@
 <form asp-action="CorrectMap" method="post">
     @* // Formular for å sende data til serveren, som kaller "CorrectMap" action metoden ved POST. *@
     <div class="form-group">
+
        @*  // Gruppe for inputfeltet for breddegrad. *@
         <label for="latitude">Latitude</label>  @* // Etikett for breddegrad. *@
         <input type="text" id="latitude" name="Latitude" class="form-control" readonly />  @* // Input-felt for breddegrad, som er skrivebeskyttet. *@
     </div>
+
     <div class="form-group">
         @* // Gruppe for inputfeltet for lengdegrad. *@
         <label for="longitude">Longitude</label>  @* // Etikett for lengdegrad. *@
