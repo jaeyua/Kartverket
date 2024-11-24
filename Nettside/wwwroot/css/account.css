@@ -1,69 +1,108 @@
-﻿.account-container {
-    background-color: rgba(208, 236, 214, 1);
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat-y;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 2rem;
-}
-
-/* Flex container for text */
-.account-box {
-    background-color: rgba(235, 190, 118, 1);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 100%;
-    opacity: .9;
-}
-
-/ Login and register btn*/
-.btn-success {
-    background-color: rgba(21, 102, 48, 1);
-    border-color: rgba(21, 102, 48, 1);
-    border-radius: 6px;
-}
-
-
-.option-site {
-    background-image: linear-gradient(to top,rgba(208, 236, 214, 1) 65%, white 35%);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.site-title {
-    font-size: 60px;
-    text-align: center;
-    padding-top: 120px;
-    margin-top: -20px;
-}
-
-.site-box {
+﻿.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    height: 600px;
-    gap: 100px;
+    margin-bottom: 30px;
 }
 
+.contact-details, .profile-photo {
+    width: 48%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-.role-button {
-    background-color: rgba(252, 235, 205, 1);
-    font-weight: bold;
+    .contact-details h2, .profile-photo h2, .change-password h2 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.photo-container {
     text-align: center;
-    display: inline-block;
-    font-size: 30px;
-    border: 1px solid darkgrey;
-    border-bottom: 4px solid grey;
-    padding: 10px 20px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.photo-container .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
     cursor: pointer;
-    width: 400px;
-    height: 200px;
-    border-radius: 8px;
-    margin-bottom: -100px;
+    border-radius: 5px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.change-password {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-actions {
+    text-align: center;
+}
+
+    .profile-actions .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 0 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
 }
