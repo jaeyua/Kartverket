@@ -7,7 +7,7 @@ namespace Nettside.Models
     {
         // Unik identifikator for områdeendringen, merket som primærnøkkel.
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         // GeoJSON-struktur som representerer endringen i området.
         public string GeoJson { get; set; }

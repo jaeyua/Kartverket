@@ -1,39 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Nettside.Models;
-using Nettside.Data;
+using Nettside.Repositiories;
 
 namespace Nettside.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _context;
         private static List<PositionModel> positions = new List<PositionModel>();
-        private static List<AreaChange> changes = new List<AreaChange>();
+        private readonly IGeoChangesRepository geoChangesRepository;
+        private readonly IAreaChangeRepository areaChangeRepository;
 
-        // Konstruktør som initialiserer loggeren og databasen.
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
+        // Constructor that initializes the repositories.
+        public HomeController(IGeoChangesRepository geoChangesRepository, IAreaChangeRepository areaChangeRepository)
         {
-            _logger = logger;
-            _context = context;
+            this.geoChangesRepository = geoChangesRepository;
+            this.areaChangeRepository = areaChangeRepository;
         }
 
-        // Vist hovedsiden (Index).
+        // Display the main page (Index).
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        // Vist kartkorreksjonssiden (CorrectMap) for GET-forespørsler.
+        // Display the map correction page (CorrectMap) for GET requests.
         [HttpGet]
         public IActionResult CorrectMap()
         {
             return View();
         }
 
-        // Håndter POST-forespørsel for kartkorreksjon og lagre posisjonsdata hvis modellen er gyldig.
+        // Handle POST request for map correction and save position data if the model is valid.
         [HttpPost]
         public IActionResult CorrectMap(PositionModel model)
         {
@@ -45,23 +44,23 @@ namespace Nettside.Controllers
             return View();
         }
 
-        // Vist oversikt over lagrede posisjoner (CorrectionOverview).
+        // Display the overview of saved positions (CorrectionOverview).
         [HttpGet]
         public IActionResult CorrectionOverview()
         {
             return View(positions);
         }
 
-        // Vist siden for registrering av områdeendring (RegisterAreaChange).
+        // Display the page for registering an area change (RegisterAreaChange).
         [HttpGet]
         public IActionResult RegisterAreaChange()
         {
             return View();
         }
 
-        // Håndter POST-forespørsel for å registrere en områdeendring i databasen.
+        // Handle POST request to register an area change in the database.
         [HttpPost]
-        public IActionResult RegisterAreaChange(string geoJson, string description)
+        public async Task<IActionResult> RegisterAreaChange(string geoJson, string description)
         {
             try
             {
@@ -70,14 +69,13 @@ namespace Nettside.Controllers
                     return BadRequest("Invalid data.");
                 }
 
-                var newGeoChange = new GeoChanges
+                var newAreaChange = new AreaChange
                 {
                     GeoJson = geoJson,
                     Description = description
                 };
 
-                _context.GeoChange.Add(newGeoChange);
-                _context.SaveChanges();
+                await areaChangeRepository.AddAsync(newAreaChange);
 
                 return RedirectToAction("AreaChangeOverview");
             }
@@ -88,18 +86,18 @@ namespace Nettside.Controllers
             }
         }
 
-        // Vist personvernspolitikk-siden (Privacy).
+        // Display the privacy policy page (Privacy).
         public IActionResult Privacy()
         {
             return View();
         }
 
-        // Hent oversikt over områdeendringer fra databasen og vis den.
+        // Fetch the overview of area changes from the database and display it.
         [HttpGet]
-        public IActionResult AreaChangeOverview()
+        public async Task<IActionResult> AreaChangeOverview()
         {
-            var changes_cb = _context.GeoChange.ToList();
-            return View(changes_cb);
+            var areaChanges = await areaChangeRepository.GetAllAsync();
+            return View(areaChanges);
         }
     }
 }

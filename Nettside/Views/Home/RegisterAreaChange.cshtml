@@ -1,7 +1,4 @@
-﻿@{
-    // Setter sidetittelen til "Register Change".
-    ViewData["Title"] = "Register Change";
-}
+﻿@model Nettside.Models.AreaChange
 
 <div style="display: flex; flex-direction: row; height: 100vh; background-color: #d0a15a;">
     <!-- Kartseksjonen tar opp to tredjedeler av skjermens bredde -->
@@ -14,7 +11,7 @@
         <form asp-action="RegisterAreaChange" method="post" style="display: flex; flex-direction: column; gap: 15px;">
             <!-- Felt for å vise RapportID, kun lesbar -->
             <label for="rapportID" style="color: white;">RapportID</label>
-            <input type="text" id="rapportID" name="RapportID" class="form-control" placeholder="Brukerens RapportID" readonly />
+            <input type="text" asp-for="Id" class="form-control" placeholder="Brukerens RapportID" hidden />
 
             <!-- Skjult felt for å lagre GeoJSON-data -->
             <input type="hidden" id="geoJsonInput" name="geoJson" />

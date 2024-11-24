@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Nettside.Data;
 using Nettside.Models;
+using Nettside.Repositiories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),
     new MySqlServerVersion(new Version(10, 5, 9))));
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IGeoChangesRepository, GeoChangesRepository>();
+builder.Services.AddScoped<IAreaChangeRepository, AreaChangeRepository>();
 
 // Konfigurerer Identity-tjenester for autentisering og autorisasjon, inkludert passord- og p�loggingskrav.
 builder.Services.AddIdentity<Users, IdentityRole>(options =>
