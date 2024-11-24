@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Nettside</title>
 
-    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -26,7 +25,6 @@
         </nav>
     </header>
 
-    
     <div id="verticalMenu" class="vertical-menu">
         <a href="#">Alle saker</a>
         <a href="#">Behandle saker</a>
@@ -36,7 +34,6 @@
         <button id="closeMenuButton" class="btn btn-danger mt-3">Lukk</button>
     </div>
 
-    
     <div id="menuOverlay" class="menu-overlay"></div>
 
     <div class="container">
@@ -46,11 +43,41 @@
     </div>
 
     <footer>
-        
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="~/images/kartverket.svg" alt="Kartverket Logo" class="logo" style="height: 70px">
+            </div>
+            <!-- Kartverket-logoen i footer. -->
+            <div class="footer-section">
+                <h4>Kontakt oss</h4>
+                <p>Telefon: <a href="tel:32118000">32 11 80 00</a></p>
+                <p>E-post: <a href="mailto:post@kartverket.no">post@kartverket.no</a></p>
+            </div>
+            <!-- Kontaktinformasjon i footer. -->
+            <div class="footer-section">
+                <h4>Hjelp</h4>
+                <p><a href="#">Driftsmeldinger</a></p>
+                <p><a href="#">Ofte stilte spørsmål</a></p>
+                <p><a href="#">Skjemaer</a></p>
+            </div>
+            <!-- Hjelpeseksjon med lenker til driftsmeldinger, spørsmål og skjemaer. -->
+            <div class="footer-section">
+                <h4>Aktuelt</h4>
+                <p><a href="#">Arrangementer og kurs</a></p>
+                <p><a href="#">Nyheter</a></p>
+                <p><a href="#">Ledige stillinger</a></p>
+                <p><a href="#">Presse </a></p>
+            </div>
+            <!-- Aktuelt-seksjon med lenker til arrangementer, nyheter, jobbmuligheter og presseinformasjon. -->
+        </div>
+
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/verticalBtn.js" asp-append-version="true"></script>
+
+    <!-- Render Scripts Section -->
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
