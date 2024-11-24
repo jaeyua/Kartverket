@@ -1,9 +1,9 @@
 ﻿@model List<Nettside.Models.PositionModel>  // Modellen som inneholder en liste av posisjoner som skal vises på denne siden.
 
-<h2>Registered Corrections</h2>  // Tittel som beskriver siden som viser de registrerte korrigeringene.
+<h2>Registered Corrections</h2>  
 
 <div>
-    // Begynner en div-container som inneholder informasjon om hver posisjon.
+    
     @foreach (var position in Model)  // Itererer gjennom listen av posisjoner i modellen.
     {
         <p><strong>Latitude:</strong>@position.Latitude</p>
@@ -15,7 +15,7 @@
     }
 </div>
 
-<div id="map" style="height: 500px;"></div>  // Plassholder for kartet med en høyde på 500px.
+<div id="map" style="height: 500px;"></div> 
 
 @section Scripts {
       // Inkluderer nødvendige skript for kartet og posisjonene.
