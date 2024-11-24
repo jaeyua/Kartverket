@@ -12,7 +12,7 @@ using Nettside.Data;
 namespace Nettside.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241120132255_InitialCreation")]
+    [Migration("20241122134923_InitialCreation")]
     partial class InitialCreation
     {
         /// <inheritdoc />
