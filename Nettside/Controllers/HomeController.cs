@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Nettside.Models;
 using Nettside.Data;
+using Nettside.Services;
 
 namespace Nettside.Controllers
 {
@@ -18,21 +19,19 @@ namespace Nettside.Controllers
         // static lists to temporarily store data in memory for positions and area changes
         private static List<PositionModel> positions = new List<PositionModel>();
         private static List<AreaChange> changes = new List<AreaChange>();
+        
+        private readonly IKommuneInfoService _KommuneInfoService;
+        private readonly IStedsnavnService _StedsnavnService;
 
 
-
-        /// <summary>
-        /// constructor for injecting dependencies like the logger and database context
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="context"></param>
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context, IKommuneInfoService kommuneInfoService, IStedsnavnService stedsnavnService)
         {
             _logger = logger;
             _context = context;
+            _KommuneInfoService = kommuneInfoService;
+            _StedsnavnService = stedsnavnService;
         }
 
-        
 
         // handles GET requests to display the homepage
         [HttpGet]
@@ -40,7 +39,65 @@ namespace Nettside.Controllers
         {
             return View();
         }
+        //en liten kommentar
 
+
+
+        // Adds API to RegisterAreaChange and displays information
+        [HttpPost]
+        public async Task<IActionResult> KommuneInfo(string kommuneNr)
+        {
+            if (string.IsNullOrEmpty(kommuneNr))
+            {
+                ViewData["Error"] = "Vennligst skriv inn et gyldig kommunenummer.";
+                return View("RegisterAreaChange");
+            }
+
+            var kommuneInfo = await _KommuneInfoService.GetKommuneInfoAsync(kommuneNr);
+            if (kommuneInfo != null)
+            {
+                var viewModel = new KommuneInfoViewModel
+                {
+                    Kommunenavn = kommuneInfo.Kommunenavn,
+                    Kommunenummer = kommuneInfo.Kommunenummer,
+                    Fylkesnavn = kommuneInfo.Fylkesnavn,
+                    SamiskForvaltningsomrade = kommuneInfo.SamiskForvaltningsomrade,
+                };
+                return View("KommuneInfo", viewModel);
+            }
+            else
+            {
+                ViewData["Error"] = $"Ingen resultater funnet for kommunenummer '{kommuneNr}'.";
+                return View("RegisterAreaChange");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Stedsnavn(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                ViewData["Error"] = "Vennligst skriv inn et gyldig stedsnavn.";
+                return View("RegisterAreaChange");
+            }
+            var stedsnavnResponse = await _StedsnavnService.GetStedsnavnAsync(searchTerm);
+            if (stedsnavnResponse?.Navn != null && stedsnavnResponse.Navn.Any())
+            {
+                var viewModel = stedsnavnResponse.Navn.Select(n => new StedsnavnViewModel
+                {
+                    Skrivemåte = n.Skrivemåte,
+                    Navneobjekttype = n.Navneobjekttype,
+                    Språk = n.Språk,
+                    Navnestatus = n.Navnestatus
+                }).ToList();
+                return View("Stedsnavn", viewModel);
+            }
+            else
+            {
+                ViewData["Error"] = $"Ingen resultater funnet for '{searchTerm}'.";
+                return View("RegisterAreaChange");
+            }
+        }
 
         // displays the 'correctmap' view for submitting map corrections
         [HttpGet]

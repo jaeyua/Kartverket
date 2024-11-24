@@ -2,11 +2,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Nettside.Data;
 using Nettside.Models;
+using Nettside.Services;
+using Nettside.API_Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+
+builder.Services.AddHttpClient<IKommuneInfoService, KommuneInfoService>();
+builder.Services.AddHttpClient<IStedsnavnService, StedsnavnService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),

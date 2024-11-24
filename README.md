@@ -1,4 +1,21 @@
-# Kartverket16
+# Gruppe 16
+## Kartverketprosjekt
+### Høst 2024
+
+---
+
+I dette prosjektet har gruppe 16 gått sammen for å lage en løsning til Kartverket, for å tilrettelegge for at kartbrukere rundt om i landet skal få muligheten til å melde ifra dersom de finner feil i kartet. 
+Kartverket har hatt en løsning for dette før, men denne var det på tide å oppdatere nå - i håp om at en ny løsning ville gjøre det lettere å melde ifra. 
+---
+
+Løsningens utseende bygger på Kartverkets eget nettsidedesign, slik at den enkelt kan implementeres med deres eksisterende løsninger. 
+Videre inneholder løsningen:
+- Forside/hjemmeside/index
+- Side for å melde inn feil
+- Side for å registrere bruker
+- Side for å logge inn
+- Side for å prosessere rapporter
+
 Kartverket prosjekt
 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⣘⣩⣅⣤⣤⣄⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
