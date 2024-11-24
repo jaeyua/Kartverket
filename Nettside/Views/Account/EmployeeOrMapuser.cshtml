@@ -1,13 +1,25 @@
-<link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<Users> UserManager
 
+<head>
+<title class="title">Privatperson eller ansatt</title>
+<link rel="stylesheet" href="css/account.css" asp-append-version="true"/>
+</head>
 <body class="option-site">
-<h2 class="privatperson-eller-ansatt">Er du privatperson eller ansatt?</h2>
-<section class="middle-section">
-    <div class="middle-content">
-        <div class="btn-container">
-            <button class="btn-1"> Privatperson</button>
-            <button class="btn-1"> Ansatt</button>
-        </div>
-    </div>
-</section>
+<div class="site-container">
+    <form method="get">
+        <h1 title="site-title" style="text-align: center"> Er du privatperson eller ansatt?</h1>
+        <div class="site-box"> 
+            <button type="submit" name="userRole" asp-action="Register" value="PrivateUser" class="role-button">
+                Jeg er privatperson
+            </button>
+            <button type="submit" name="userRole" asp-action="RegisterCaseworker" class="role-button">
+                Jeg er ansatt
+            </button>
+            <button type="submit" name="userRole"  value="Systemadministrator" class="role-button">
+                Jeg er systemadministrator
+            </button>
+    </form>
+</div>
+</div>
 </body>
