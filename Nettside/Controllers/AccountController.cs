@@ -1,11 +1,11 @@
-﻿using Kartverket16.Models.ViewModels;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nettside.Models;
+using Nettside.ViewModels;
 using System.Net.WebSockets;
-using UsersApp.ViewModels;
 
 namespace Nettside.Controllers
 {

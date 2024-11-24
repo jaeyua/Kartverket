@@ -5,55 +5,38 @@ using Nettside.Models;
 
 namespace Nettside.Data
 {
-
-
     public class AppDbContext : IdentityDbContext<Users, IdentityRole, string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
-
         public DbSet<GeoChanges> GeoChange { get; set; }
         public DbSet<AreaChange> AreaChanges { get; set; }
 
-
-
-        // <summary>
-        /// configures the model properties and seeds the database with initial data
+        /// <summary>
+        /// Configures the model properties and seeds the database with initial data.
         /// </summary>
-        /// <param name="NodelBuilder">the builder used to construct the model</param>
+        /// <param name="modelBuilder">The builder used to construct the model.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            // section for identity tables
+            // Section for identity tables
             base.OnModelCreating(modelBuilder);
 
-            // role IDs for seeding roles
-            var sysAdminRoleId = "1";
-            var caseWorkerRoleId = "2";
-            var privateUserRoleId = "3";
+            // Role IDs for seeding roles
+            var caseWorkerRoleId = "1";
+            var privateUserRoleId = "2";
 
-            // Seed roles (Systemadmin, Caseworker, PrivateUser) 
-
+            // Seed roles (Caseworker, PrivateUser)
             var roles = new List<IdentityRole>
             {
-                 new IdentityRole
-                {
-                    Name =  "System Administrator",
-                    NormalizedName = "SYSADMIN",
-                    Id = sysAdminRoleId,
-                    ConcurrencyStamp = sysAdminRoleId
-                },
-
                 new IdentityRole
                 {
-                    Name =  "Caseworker",
+                    Name = "Caseworker",
                     NormalizedName = "CASEWORKER",
                     Id = caseWorkerRoleId,
                     ConcurrencyStamp = caseWorkerRoleId
                 },
-
                 new IdentityRole
                 {
                     Name = "PrivateUser",
@@ -61,71 +44,24 @@ namespace Nettside.Data
                     Id = privateUserRoleId,
                     ConcurrencyStamp = privateUserRoleId
                 }
-
             };
 
             modelBuilder.Entity<IdentityRole>().HasData(roles);
 
-            // seed SYSADMIN
-            var sysAdminId = "1";
-            var sysAdminUser = new Users
-            {
-                Id = sysAdminId,
-                UserName = "sysadmin@kartverket.no",
-                Email = "sysadmin@kartverket.no",
-                NormalizedEmail = "sysadmin@kartverket.no".ToUpper(),
-                NormalizedUserName = "sysadmin@kartverket.no".ToUpper(),
-                FirstName = "System",
-                LastName = "Administrator"
-            };
-
-            sysAdminUser.PasswordHash = new PasswordHasher<Users>()
-                 .HashPassword(sysAdminUser, "sysAdmin@123");
-
-            modelBuilder.Entity<Users>().HasData(sysAdminUser);
-
-
-            // adding all roles to sysadmin
-
-            var sysAdminRoles = new List<IdentityUserRole<string>>
-            {
-                new IdentityUserRole<string>
-                {
-                   RoleId = sysAdminRoleId,
-                   UserId = sysAdminId
-                },
-
-                new IdentityUserRole<string>
-                {
-                    RoleId = caseWorkerRoleId,
-                    UserId = sysAdminId
-                },
-
-                 new IdentityUserRole<string>
-                {
-                    RoleId = privateUserRoleId,
-                    UserId = sysAdminId
-                }
-            };
-
-
-
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(sysAdminRoles);
-
-            var caseWorkerId = "2";
+            // Seed Caseworker user
+            var caseWorkerId = "1";
             var caseWorker = new Users
             {
                 Id = caseWorkerId,
                 UserName = "caseworker@test.com",
                 NormalizedUserName = "CASEWORKER@TEST.COM",
-                Email = "caseWorker@test.com",
+                Email = "caseworker@test.com",
                 NormalizedEmail = "CASEWORKER@TEST.COM",
                 FirstName = "Test",
                 LastName = "Caseworker"
             };
 
-            caseWorker.PasswordHash = new PasswordHasher<Users>()
-                .HashPassword(caseWorker, "caseworker@123");
+            caseWorker.PasswordHash = new PasswordHasher<Users>().HashPassword(caseWorker, "caseworker@123");
 
             modelBuilder.Entity<Users>().HasData(caseWorker);
 
@@ -135,26 +71,22 @@ namespace Nettside.Data
                     RoleId = caseWorkerRoleId,
                     UserId = caseWorkerId
                 }
+            );
 
-        );
-
-
-            // seed PRIVATEUSER
-
-            var privateUserId = "3";
+            // Seed PrivateUser
+            var privateUserId = "2";
             var privateUser = new Users
             {
                 Id = privateUserId,
                 UserName = "privateUser@test.com",
                 NormalizedUserName = "PRIVATEUSER@TEST.COM",
-                Email = "privateUser@test.com",
+                Email = "privateuser@test.com",
                 NormalizedEmail = "PRIVATEUSER@TEST.COM",
                 FirstName = "Test",
-                LastName = "privateUser"
+                LastName = "PrivateUser"
             };
 
-            privateUser.PasswordHash = new PasswordHasher<Users>()
-                .HashPassword(privateUser, "privateUser@123");
+            privateUser.PasswordHash = new PasswordHasher<Users>().HashPassword(privateUser, "privateUser@123");
 
             modelBuilder.Entity<Users>().HasData(privateUser);
 
@@ -163,16 +95,8 @@ namespace Nettside.Data
                 {
                     RoleId = privateUserRoleId,
                     UserId = privateUserId
-
-
-
-                });
-
-
-    }
+                }
+            );
+        }
     }
 }
-
-    
-
-

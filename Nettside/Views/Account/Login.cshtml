@@ -1,5 +1,5 @@
-﻿@using UsersApp.ViewModels;
-@model LoginViewModel;
+﻿@using Nettside.ViewModels
+@model LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -11,7 +11,7 @@
         <h2 class="text-center mb-4">Login</h2>
         <form method="post">
             @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="text-danger"></div>
             <div class="mb-3">
                 <label asp-for="UserName" class="form-label"></label>
                 <input asp-for="UserName" class="form-control" />

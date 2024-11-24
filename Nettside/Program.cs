@@ -71,8 +71,11 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "en feil oppstod under migrasjon eller seeding");
     }
 
-
 }
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -86,6 +89,35 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+
+// security headers
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Append("X-XSS-Protection", "1; mode-block");
+
+    // enhance CSP with more restrictions 
+    context.Response.Headers.Append("Content-Security-Policy",
+         "default-src 'self'; " +
+            "script-src 'self' https://cdnjs.cloudflare.com; " +
+            "style-src 'self' https://cdnjs.cloudflare.com; " +
+            "font-src 'self' https://fonts.gstatic.com; " +
+            "img-src 'self' data:; " +
+            "connect-src 'self'; " +
+            "object-src 'none';");
+
+    context.Response.Headers["X-Frame-Options"] = "DENY";
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+    context.Response.Headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload";
+
+    await next();
+
+});
+
+
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();
