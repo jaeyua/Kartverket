@@ -1,51 +1,69 @@
 ﻿@model Nettside.Models.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    ViewData["Title"] = "Register"; // Setter tittelen på nettsiden til "Register"
+    Layout = "~/Views/Shared/_AccountLayout.cshtml"; // Bruker en delt layout for kontosider
 }
 
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Register now</h2>
+        <h2 class="text-center mb-4">Register now</h2> <!-- Tittel på registreringssiden -->
+        <!-- Skjema for registrering -->
         <form asp-action="Register" method="post">
-            @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.AntiForgeryToken() <!-- Legger til anti-CSRF token for sikkerhet -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Vist valideringsfeil -->
+
+            <!-- Fornavn inputfelt -->
             <div class="mb-3">
                 <label asp-for="FirstName" class="form-label">First Name</label>
                 <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <span asp-validation-for="FirstName" class="text-danger"></span> <!-- Valideringsfeil for FirstName -->
             </div>
+
+            <!-- Etternavn inputfelt -->
             <div class="mb-3">
                 <label asp-for="LastName" class="form-label">Last name</label>
                 <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Username</label>
-                <input asp-for="Username" class="form-control" />
-                <span class="text-danger"></span>
+                <span asp-validation-for="LastName" class="text-danger"></span> <!-- Valideringsfeil for LastName -->
             </div>
 
+            <!-- Brukernavn inputfelt -->
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span class="text-danger"></span> <!-- Valideringsfeil for Username, ikke definert her -->
+            </div>
+
+            <!-- E-post inputfelt -->
             <div class="mb-3">
                 <label asp-for="Email" class="form-label"></label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <span asp-validation-for="Email" class="text-danger"></span> <!-- Valideringsfeil for Email -->
             </div>
+
+            <!-- Passord inputfelt -->
             <div class="mb-3">
                 <label asp-for="Password" class="form-label"></label>
                 <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <span asp-validation-for="Password" class="text-danger"></span> <!-- Valideringsfeil for Password -->
             </div>
+
+            <!-- Bekreft passord inputfelt -->
             <div class="mb-3">
                 <label asp-for="ConfirmPassword" class="form-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span> <!-- Valideringsfeil for ConfirmPassword -->
             </div>
+
+            <!-- Registreringsknapp -->
             <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
+
+            <!-- Lenke til login-siden hvis brukeren allerede har en konto -->
             <p class="text-center mt-2">
                 Already have an account? <a asp-controller="Account" asp-action="Login" class="text-decoration-underline" style="color: rgba(21, 102, 48, 1)">Login</a>
             </p>
+
+            <!-- Lenke til forsiden -->
             <div class="text-center">
                 <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3" style="color: rgba(21, 102, 48, 1)">Back</a>
             </div>
@@ -56,5 +74,6 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+        <!-- Inkluderer valideringsskriptene -->
     }
 }

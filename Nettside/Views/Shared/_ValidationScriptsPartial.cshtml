@@ -1,2 +1,7 @@
-﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+﻿@* This script is part of the jQuery Validation plugin, which provides client-side validation for forms
+It validates form inputs before they are submitted to the server, ensuring that fields meet certain criteria (e.g., required fields, correct email format, etc.). *@
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+@* his script is used alongside jQuery Validation to enable unobtrusive validation in ASP.NET MVC. 
+It works by reading validation attributes added to HTML elements by the server-side code and automatically binding the validation rules to the elements without the need for manual JavaScript *@.
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

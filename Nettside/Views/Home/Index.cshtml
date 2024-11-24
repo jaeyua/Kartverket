@@ -1,36 +1,44 @@
-﻿@* // Index  *@
+@* // Index  *@
 @{
+    // Setter opp layout-filen som brukes for denne siden.
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Angir tittel for denne siden.
     ViewData["Title"] = "Home Page";
 }
 
+@* // Legger til stilark for siden med versjonskontroll. *@
 <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
 <body>
-<div class="top-section">
-    <div class="description">
-        <h1 class="title">Her kan du melde inn kartendringer</h1>
-        <p class="fullDescription">
-            <br/>
-            Dersom du har funnet <br/>
-            ut at det er mangler i <br/>
-            kartet, så kan du hjelpe <br/>
-            oss med å oppdatere <br/>
-            det!
-        </p> 
+    <div class="top-section">
+        <div class="description">
+            <!-- Viser en hovedtittel og beskrivelse av funksjonaliteten på siden -->
+            <h1 class="title">Her kan du melde inn kartendringer</h1>
+            <p class="fullDescription">
+                <br />
+                Dersom du har funnet <br />
+                ut at det er mangler i <br />
+                kartet, så kan du hjelpe <br />
+                oss med å oppdatere <br />
+                det!
+            </p>
+        </div>
+        <div class="picture">
+            <!-- Viser et bilde med lenke til hjem-siden -->
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/Kartverket_bilde.jpeg" alt="Home page photo" style="height: 550px; border-radius: 8px" />
+            </a>
+        </div>
     </div>
-    <div class="picture">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/images/Kartverket_bilde.jpeg" alt="Home page photo" style="height: 550px; border-radius: 8px"/>
-        </a>
+    <div bottom-section>
+        <div class="button-container">
+            <!-- En knapp som navigerer brukeren til en side for innmelding av kartendringer -->
+            <h1 class="AreaChangeBtn" onclick="window.location.href='@Url.Action("EmployeeOrMapuser", "Account")'">
+                Meld inn endring her:
+            </h1>
+        </div>
     </div>
-</div>
-<div bottom-section>
-<div class="button-container">
-    <h1 class="AreaChangeBtn" onclick="window.location.href='@Url.Action("EmployeeOrMapuser", "Account")'">
-        Meld inn endring her:
-    </h1>
-</div>
-</div>
 </body>
 
