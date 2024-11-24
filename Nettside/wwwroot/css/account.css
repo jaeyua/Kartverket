@@ -1,11 +1,4 @@
-﻿.body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.option-site {
-    background-image: linear-gradient(to top,rgba(208, 236, 214, 1) 60%, white 40%);
-}
-
+﻿
 .account-container {
     background-color: rgba(208, 236, 214, 1);
     background-size: cover;
@@ -37,37 +30,30 @@
 }
 
 
-.privatperson-eller-ansatt {
+.option-site {
+    background-image: linear-gradient(to top,rgba(208, 236, 214, 1) 65%, white 35%);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.site-title {
     font-size: 60px;
     text-align: center;
     padding-top: 120px;
+    margin-top: -20px;
 }
 
-.middle-section {
+.site-box {
     padding: 20px;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 600px;
+    gap: 100px;
 }
 
-.middle-container {
-    max-width: 800px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
 
-.btn-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
-    margin-bottom: -110px;
-    gap: 300px;
-}
-
-.btn-1 {
+.role-button {
     background-color: rgba(252, 235, 205, 1);
     font-weight: bold;
     text-align: center;
@@ -80,6 +66,7 @@
     width: 400px;
     height: 200px;
     border-radius: 8px;
+    margin-bottom: -100px;
 }
 
 
