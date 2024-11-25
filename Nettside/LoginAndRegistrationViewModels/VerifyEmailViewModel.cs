@@ -2,12 +2,18 @@
 
 namespace UsersApp.ViewModels
 {
-    // ViewModel for e-postverifisering, som inneholder et felt for e-postadressen.
+    /// <summary>
+    /// ViewModel for email verification, containing a field for the email address.
+    /// </summary>
     public class VerifyEmailViewModel
     {
-        // E-postfelt som er påkrevd og må være en gyldig e-postadresse.
+        /// <summary>
+        /// Gets or sets the email address. This field is required and must be a valid email address.
+        /// </summary>
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
     }
 }
+
+

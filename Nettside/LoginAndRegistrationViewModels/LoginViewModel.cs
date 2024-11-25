@@ -2,21 +2,30 @@
 
 namespace UsersApp.ViewModels
 {
-    // ViewModel for innlogging, som inneholder felt for e-post, passord og husk meg-valg.
+    /// <summary>
+    /// ViewModel for user login, containing fields for email, password, and remember me option.
+    /// </summary>
     public class LoginViewModel
     {
-        // E-postfelt som er påkrevd og må være en gyldig e-postadresse.
+        /// <summary>
+        /// Gets or sets the email address. This field is required and must be a valid email address.
+        /// </summary>
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        // Passordfelt som er påkrevd og skal behandles som et passord.
+        /// <summary>
+        /// Gets or sets the password. This field is required and should be treated as a password.
+        /// </summary>
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        // Boolsk verdi for å angi om brukeren skal huskes ved neste pålogging.
+        /// <summary>
+        /// Gets or sets a value indicating whether the user should be remembered on the next login.
+        /// </summary>
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
 }
+

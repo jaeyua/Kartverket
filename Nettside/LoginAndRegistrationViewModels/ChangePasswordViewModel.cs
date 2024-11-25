@@ -2,26 +2,35 @@
 
 namespace UsersApp.ViewModels
 {
-    // ViewModel for endring av passord, som inneholder felt for e-post og passord.
+    /// <summary>
+    /// ViewModel for changing the password, containing fields for email and password.
+    /// </summary>
     public class ChangePasswordViewModel
     {
-        // E-postfelt som er påkrevd og må være en gyldig e-postadresse.
+        /// <summary>
+        /// Gets or sets the email address. This field is required and must be a valid email address.
+        /// </summary>
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        // Nytt passord som er påkrevd, med minimum 8 tegn og maksimum 40 tegn, og det må bekrefte passordet.
+        /// <summary>
+        /// Gets or sets the new password. This field is required, must be between 8 and 40 characters long, and must match the confirmation password.
+        /// </summary>
         [Required(ErrorMessage = "Password is required.")]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at {2} and at max {1} characters long.")]
+        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at least {2} and at most {1} characters long.")]
         [DataType(DataType.Password)]
         [Display(Name = "New Password")]
         [Compare("ConfirmNewPassword", ErrorMessage = "Password does not match.")]
         public string NewPassword { get; set; }
 
-        // Bekreftelse på det nye passordet som er påkrevd.
+        /// <summary>
+        /// Gets or sets the confirmation of the new password. This field is required.
+        /// </summary>
         [Required(ErrorMessage = "Confirm Password is required.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm New Password")]
         public string ConfirmNewPassword { get; set; }
     }
 }
+
