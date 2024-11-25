@@ -6,6 +6,11 @@ using Nettside.Repositiories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/// <summary>
+/// Adds services to the container and configures the application.
+/// </summary>
+/// <param name="args">The command-line arguments.</param>
+
 // Legger til tjenester for MVC-kontrollere og visninger.
 builder.Services.AddControllersWithViews();
 
@@ -45,9 +50,6 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<AppDbContext>();
         context.Database.Migrate();
-
-
-
     }
     catch (Exception ex)
     {
@@ -57,7 +59,6 @@ using (var scope = app.Services.CreateScope())
         // Optionally, rethrow or handle the exception as needed
     }
 }
-
 
 // Konfigurerer HTTP-foresp�rselspipelinen.
 if (!app.Environment.IsDevelopment())
@@ -81,3 +82,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"); // Ruter til `HomeController` og `Index`-handling som standard.
 
 app.Run(); // Starter applikasjonen.
+
+
+
+
+
