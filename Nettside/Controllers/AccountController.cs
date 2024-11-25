@@ -43,7 +43,7 @@ namespace Nettside.Controllers
         
        
 
-        /// <summary>
+        /// <summary> 
         /// Handles user registration form submission and creates a new user account
         /// </summary>
         /// <param name="registerViewModel">the user registration details</param>
