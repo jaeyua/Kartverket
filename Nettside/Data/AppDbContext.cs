@@ -5,11 +5,19 @@ using Nettside.Models;
 
 namespace Nettside.Data
 {
+
+    // database context class, extending IdentityDbContext for user management
     public class AppDbContext : IdentityDbContext<Users, IdentityRole, string>
     {
+
+        /// <summary>
+        /// initializes a new instance of the <see cref="AppDbContext"/> class.
+        /// </summary>
+        /// <param name="options">options for configuring the database context. </param>
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+
 
         public DbSet<GeoChanges> GeoChange { get; set; }
         public DbSet<AreaChange> AreaChanges { get; set; }
@@ -48,7 +56,7 @@ namespace Nettside.Data
 
             modelBuilder.Entity<IdentityRole>().HasData(roles);
 
-            // Seed Caseworker user
+            // Seed Caseworker
             var caseWorkerId = "1";
             var caseWorker = new Users
             {

@@ -3,12 +3,14 @@ using System.Diagnostics;
 using Nettside.Models;
 using Nettside.Data;
 using Microsoft.AspNetCore.Authorization;
+using Nettside.Repositories;
 
 namespace Nettside.Controllers
 {
 
     /// <summary>
-    /// respomsible for managing actions related to the homepage and error handling
+    /// respomsible for managing actions related to the homepage, including displaying views,
+    /// handling error management and processing area change registrations.
     /// </summary>
     public class HomeController : Controller
     {
@@ -20,6 +22,8 @@ namespace Nettside.Controllers
         private static List<PositionModel> positions = new List<PositionModel>();
         private static List<AreaChange> changes = new List<AreaChange>();
 
+        private readonly IGeoChangesRepository geoChangesRepository;
+        private readonly IAreaChangeRepository areaChangeRepository;
 
 
         /// <summary>
@@ -27,10 +31,10 @@ namespace Nettside.Controllers
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="context"></param>
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
+        public HomeController(IGeoChangesRepository geoChangesRepository, IAreaChangeRepository areaChangeRepository)
         {
-            _logger = logger;
-            _context = context;
+            this.geoChangesRepository = geoChangesRepository;
+            this.areaChangeRepository = areaChangeRepository;
         }
 
            
@@ -43,47 +47,10 @@ namespace Nettside.Controllers
 
      
 
-        // displays the 'correctmap' view for submitting map corrections
-        [HttpGet]
-        public IActionResult CorrectMap()
-        {
-            return View();
-        }
-
-
-        /// <summary>
-        /// handles post requests for map correction submissions
-        /// </summary>
-        /// <param name="model">the position model containing submitted correction data</param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult CorrectMap(PositionModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // add the valid position data to the in-memory list
-                positions.Add(model);
-
-
-                // redirect to the overview of corrections
-                return View("CorrectionOverview", positions);
-            }
-            return View();
-        }
-
-
-
-       
-        [HttpGet]
-        public IActionResult CorrectionOverview()
-        {
-            return View(positions);
-        }
-
 
         [Authorize(Roles = "Caseworker")]
         [HttpGet]
-        public IActionResult RegisterAreaChange()
+        public  IActionResult RegisterAreaChange()
         {
             return View();
         }
@@ -91,12 +58,12 @@ namespace Nettside.Controllers
         /// <summary>
         /// handles the submission of new area change data, validates it, and saves it to the database
         /// </summary>
-        /// <param name="geoJson">the geojson string representing the area changw</param>
+        /// <param name="geoJson">the geojson string representing the area change</param>
         /// <param name="description">description of the area change</param>
         /// <returns>redirects to the "arechangeoverview" view if successful, or returns a badrequest if data is invalid</returns>
-        [Authorize(Roles = "Caseworker")]
+        [Authorize(Roles = "Caseworker, PrivateUser")]
         [HttpPost]
-        public IActionResult RegisterAreaChange(string geoJson, string description)
+        public async Task<IActionResult> RegisterAreaChange(string geoJson, string description)
         {
             try
             {
@@ -105,15 +72,14 @@ namespace Nettside.Controllers
                     return BadRequest("Invalid data.");
                 }
 
-                var newGeoChange = new GeoChanges
+                var newAreaChange = new AreaChange
                 {
                     GeoJson = geoJson,
                     Description = description
                 };
 
                 // Save to the database
-                _context.GeoChange.Add(newGeoChange);
-                _context.SaveChanges();
+               await areaChangeRepository.AddAsync(newAreaChange);
 
                 // Redirect to the overview of changes
                 return RedirectToAction("AreaChangeOverview");
@@ -133,10 +99,10 @@ namespace Nettside.Controllers
         // Display the overview of registered changes fetched from the database
         [Authorize(Roles = "Caseworker, PrivateUser")]
         [HttpGet]
-        public IActionResult AreaChangeOverview()
+        public async Task<ActionResult> AreaChangeOverview()
         {
-            var changes_cb = _context.GeoChange.ToList();
-            return View(changes_cb);
+            var areaChanges = await areaChangeRepository.GetAllAsync();
+            return View(areaChanges);
         }
 
     }
