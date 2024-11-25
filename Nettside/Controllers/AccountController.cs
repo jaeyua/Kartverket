@@ -9,14 +9,24 @@ using System.Net.WebSockets;
 
 namespace Nettside.Controllers
 {
-    [Authorize]
+    /// <summary>
+    /// Controller to handle account-related actions like registration, login and profile management. 
+    /// </summary>
+
+    [Authorize] // requires authentication for all actions by default unless otherwise specified 
     public class AccountController : Controller
     {
-        private readonly SignInManager<Users> signInManager;
-        private readonly UserManager<Users> userManager;    
+        private readonly SignInManager<Users> signInManager; // service provided by asp.net core identity
+        private readonly UserManager<Users> userManager;    // service provided by asp.net core identity
 
-        // Constructor to initialize SignInManager and UserManager
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
+
+
+        /// <summary>
+        /// Constructor to initialize SignInManager and UserManager
+        /// </summary>
+        /// <param name="signInManager">a service to manage user sign-in operations</param>
+        /// <param name="userManager">a service to manage user interactions</param>
+        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager) // constructor to inject signInManager and UserManager
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -31,7 +41,13 @@ namespace Nettside.Controllers
             return View();
         }
         
-        // Handles registration form submission
+       
+
+        /// <summary>
+        /// Handles user registration form submission and creates a new user account
+        /// </summary>
+        /// <param name="registerViewModel">the user registration details</param>
+        /// <returns>redirects to login on success or reloads the registration page on failure</returns>
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [HttpPost]
@@ -71,7 +87,7 @@ namespace Nettside.Controllers
 
 
 
-
+        // displays the registration page for a caseworker.
         [HttpGet]
         public async Task<ActionResult> RegisterCaseWorker()
         {
@@ -79,6 +95,12 @@ namespace Nettside.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// handles caseworker registration form submission. 
+        /// </summary>
+        /// <param name="registerViewModel">the caseworker registration details.</param>
+        /// <returns>redirects to login on success or reloads the registration page on failure </returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> RegisterCaseworker(RegisterViewModel registerViewModel)
@@ -96,7 +118,7 @@ namespace Nettside.Controllers
 
             if (applicationResult.Succeeded)
             {
-                // Add the user to the "PrivateUser" role
+                // Add the user to the "Caseworker" role
                 var applicationIdentityResult = await userManager.AddToRoleAsync(createUser, "Caseworker");
 
                 if (applicationIdentityResult.Succeeded)
@@ -131,7 +153,12 @@ namespace Nettside.Controllers
             return View();
         }
 
-         // Handles login form submission
+         
+        /// <summary>
+        /// handles login form submission and authenticates the user
+        /// </summary>
+        /// <param name="loginViewmodel">the login details</param>
+        /// <returns>redirects to home on success or reloads the login page on failure.</returns>
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [HttpPost]
@@ -166,6 +193,7 @@ namespace Nettside.Controllers
 
 
      
+        // displays the employee or map user selection page
         [HttpGet]
         [AllowAnonymous]
         public IActionResult EmployeeOrMapUser()
@@ -174,7 +202,12 @@ namespace Nettside.Controllers
         }
 
 
-        // Displays the page for selecting employee or map user
+
+       /// <summary>
+       /// assigns a role to the logged-in user based on the selected option.
+       /// </summary>
+       /// <param name="userRole">the selected role.</param>
+       /// <returns>redirects to the role selection page if the role is invalid or assigns the role successfully.</returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         [AllowAnonymous]
@@ -219,13 +252,19 @@ namespace Nettside.Controllers
 
 
 
-        // Displays the email verification page
+        // displays the email verification page
         public IActionResult VerifyEmail()
         {
             return View();
         }
 
-        // Handles email verification form submission
+
+        
+        /// <summary>
+        /// handles email verification form submission
+        /// </summary>
+        /// <param name="model">the email verification details</param>
+        /// <returns>redirects to changepassword if the email is valid or reloads the verification page on failure.</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> VerifyEmail(VerifyEmailViewModel model)
@@ -258,7 +297,15 @@ namespace Nettside.Controllers
             return View(new ChangePasswordViewModel { Email = username });
         }
 
-        // Handles change password form submission
+
+
+
+
+        /// <summary>
+        /// displays the changepassword page
+        /// </summary>
+        /// <param name="model">the username associated with the account.</param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -298,6 +345,8 @@ namespace Nettside.Controllers
         }
 
 
+
+       // displays the access denied page for unauthorized users.
         [HttpGet]
         [AllowAnonymous]
         public IActionResult AccessDenied()
