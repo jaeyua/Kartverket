@@ -1,6 +1,4 @@
-# Gruppe 16
-## Kartverket-prosjekt
-### Høst 2024
+# Gruppe 16 - Kartverket-prosjekt
 ---
 
 **Prosjektets beskrivelse**
@@ -11,6 +9,7 @@ Gruppe 16 slo seg sammen for å lage en slik løsning for Kartverket. Løsningen
 
 Designet av nettsiden følger det Kartverket bruker på sine nettsider i dag. Å gjenbruke kode og design som allerede er i bruk, gjør det lettere for Kartverket å implementere de nye sidene gitt av Gruppe 16 på sine eksisterende nettsider. 
 
+---
 
 **Løsningens innhold:**
 - Forside/hjemmeside/index
@@ -18,3 +17,5 @@ Designet av nettsiden følger det Kartverket bruker på sine nettsider i dag. Å
 - Side for å registrere bruker
 - Side for å logge inn
 - Side for å prosessere rapporter
+- Kartverkets API for kommuneinfo
+- Kartverkets API for stedsinfo
