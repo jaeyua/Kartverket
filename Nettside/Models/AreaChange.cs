@@ -2,17 +2,33 @@
 
 namespace Nettside.Models
 {
-    // Modell for en områdeendring, som inneholder informasjon om geojson-data og beskrivelse.
+    /// <summary>
+    /// Model for an area change, containing information about geojson data and description.
+    /// </summary>
     public class AreaChange
     {
-        // Unik identifikator for områdeendringen, merket som primærnøkkel.
+        /// <summary>
+        /// Gets or sets the unique identifier for the area change, marked as the primary key.
+        /// </summary>
         [Key]
         public int Id { get; set; }
 
-        // GeoJSON-struktur som representerer endringen i området.
+        /// <summary>
+        /// Gets or sets the GeoJSON structure representing the change in the area.
+        /// </summary>
         public string GeoJson { get; set; }
 
-        // Beskrivelse av områdeendringen.
+        /// <summary>
+        /// Gets or sets the description of the area change.
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user type associated with the area change.
+        /// </summary>
+        public string UserType { get; set; } // Property to identify the user type
     }
 }
+
+
+

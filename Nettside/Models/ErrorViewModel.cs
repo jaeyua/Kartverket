@@ -1,12 +1,21 @@
 namespace Nettside.Models
 {
-    // Modell som representerer en feilmelding, inkludert informasjon om forespørselen som forårsaket feilen.
+    /// <summary>
+    /// Model representing an error message, including information about the request that caused the error.
+    /// </summary>
     public class ErrorViewModel
     {
-        // Forespørselens ID, som kan være null hvis ikke tilgjengelig.
+        /// <summary>
+        /// Gets or sets the request ID, which can be null if not available.
+        /// </summary>
         public string? RequestId { get; set; }
 
-        // Egenskap som bestemmer om forespørselens ID skal vises, basert på om den er tilgjengelig.
+        /// <summary>
+        /// Gets a value indicating whether the request ID should be shown, based on its availability.
+        /// </summary>
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+
+
+

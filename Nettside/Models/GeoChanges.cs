@@ -3,17 +3,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Nettside.Models
 {
-    // Modell som representerer geodata for endringer, inkludert ID, geojson-data og beskrivelse.
+    /// <summary>
+    /// Model representing geodata changes, including ID, geojson data, and description.
+    /// </summary>
     public class GeoChanges
     {
-        // Unik identifikator for geodataendringen, merket som primærnøkkel.
+        /// <summary>
+        /// Gets or sets the unique identifier for the geodata change, marked as the primary key.
+        /// </summary>
         [Key]
         public int Id { get; set; }
 
-        // GeoJSON-struktur som representerer endringen i området, kan være null.
+        /// <summary>
+        /// Gets or sets the GeoJSON structure representing the change in the area. Can be null.
+        /// </summary>
         public string? GeoJson { get; set; }
 
-        // Beskrivelse av geodataendringen, kan være null.
+        /// <summary>
+        /// Gets or sets the description of the geodata change. Can be null.
+        /// </summary>
         public string? Description { get; set; }
     }
 }
+
+
+

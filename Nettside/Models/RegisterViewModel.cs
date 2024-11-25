@@ -2,37 +2,53 @@
 
 namespace Nettside.Models
 {
-    // ViewModel for registrering av bruker, inkludert felt for personlig informasjon og passord.
+    /// <summary>
+    /// ViewModel for user registration, including fields for personal information and password.
+    /// </summary>
     public class RegisterViewModel
     {
-        // Brukernavn for kontoen.
+        /// <summary>
+        /// Gets or sets the username for the account.
+        /// </summary>
         public string Username { get; set; }
 
-        // Fornavn som er påkrevd ved registrering.
+        /// <summary>
+        /// Gets or sets the first name. This field is required.
+        /// </summary>
         [Required(ErrorMessage = "First name is required.")]
         public string FirstName { get; set; }
 
-        // Etternavn som er påkrevd ved registrering.
+        /// <summary>
+        /// Gets or sets the last name. This field is required.
+        /// </summary>
         [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
 
-        // E-postadresse som er påkrevd og må være gyldig.
+        /// <summary>
+        /// Gets or sets the email address. This field is required and must be a valid email address.
+        /// </summary>
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        // Passord som er påkrevd, og må være mellom 8 og 40 tegn langt.
-        // Passordet må også bekreftes mot bekreftelsespassordet.
+        /// <summary>
+        /// Gets or sets the password. This field is required, must be between 8 and 40 characters long, and must match the confirmation password.
+        /// </summary>
         [Required(ErrorMessage = "Password is required.")]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at {2} and at max {1} characters long.")]
+        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at least {2} and at most {1} characters long.")]
         [DataType(DataType.Password)]
         [Compare("ConfirmPassword", ErrorMessage = "Password does not match.")]
         public string Password { get; set; }
 
-        // Bekreftelse av passord som er påkrevd.
+        /// <summary>
+        /// Gets or sets the confirmation of the password. This field is required.
+        /// </summary>
         [Required(ErrorMessage = "Confirm Password is required.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
     }
 }
+
+
+
